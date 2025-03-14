@@ -1,182 +1,151 @@
+// // Import all model classes
 import User from './User';
-import CarrierProfile from './CarrierProfile';
-import Package from './Packages';
-import Route from './Route';
-import Match from './Match';
-import Payment from './Payment';
-import Rating from './Rating';
-import Notification from './Notification';
+// import CarrierProfile from './CarrierProfile';
+// import Package from './Packages';
+// import Route from './Route';
+// import Match from './Match';
+// import Payment from './Payment';
+// import Rating from './Rating';
+// import Notification from './Notification';
 
-// Define model relationships
+// // Export relationship helper functions for Firestore
 
-// User - CarrierProfile (One-to-One)
-User.hasOne(CarrierProfile, {
-  foreignKey: 'userId',
-  as: 'carrierProfile',
-  onDelete: 'CASCADE',
-});
-CarrierProfile.belongsTo(User, {
-  foreignKey: 'userId',
-  as: 'user',
-});
+// /**
+//  * Get a carrier profile for a user
+//  * @param userId The user ID to get the carrier profile for
+//  */
+// export async function getCarrierProfileForUser(userId: string): Promise<CarrierProfile | null> {
+//   return await CarrierProfile.findByUserId(userId);
+// }
 
-// User - Package (Sender) (One-to-Many)
-User.hasMany(Package, {
-  foreignKey: 'senderId',
-  as: 'sentPackages',
-});
-Package.belongsTo(User, {
-  foreignKey: 'senderId',
-  as: 'sender',
-});
+// /**
+//  * Get all packages sent by a user
+//  * @param userId The sender's user ID
+//  */
+// export async function getSentPackages(userId: string): Promise<Package[]> {
+//   return await Package.findBySenderId(userId);
+// }
 
-// User - Package (Carrier) (One-to-Many)
-User.hasMany(Package, {
-  foreignKey: 'carrierId',
-  as: 'deliveredPackages',
-});
-Package.belongsTo(User, {
-  foreignKey: 'carrierId',
-  as: 'carrier',
-});
+// /**
+//  * Get all packages carried by a user
+//  * @param userId The carrier's user ID
+//  */
+// export async function getDeliveredPackages(userId: string): Promise<Package[]> {
+//   return await Package.findByCarrierId(userId);
+// }
 
-// User - Route (One-to-Many)
-User.hasMany(Route, {
-  foreignKey: 'carrierId',
-  as: 'routes',
-});
-Route.belongsTo(User, {
-  foreignKey: 'carrierId',
-  as: 'carrier',
-});
+// /**
+//  * Get all routes created by a carrier
+//  * @param carrierId The carrier's user ID
+//  */
+// export async function getRoutesForCarrier(carrierId: string): Promise<Route[]> {
+//   return await Route.findByCarrierId(carrierId);
+// }
 
-// User - Match (Carrier) (One-to-Many)
-User.hasMany(Match, {
-  foreignKey: 'carrierId',
-  as: 'matches',
-});
-Match.belongsTo(User, {
-  foreignKey: 'carrierId',
-  as: 'carrier',
-});
+// /**
+//  * Get all matches for a carrier
+//  * @param carrierId The carrier's user ID
+//  */
+// export async function getMatchesForCarrier(carrierId: string): Promise<Match[]> {
+//   return await Match.findByCarrierId(carrierId);
+// }
 
-// Package - Match (One-to-Many)
-Package.hasMany(Match, {
-  foreignKey: 'packageId',
-  as: 'matches',
-});
-Match.belongsTo(Package, {
-  foreignKey: 'packageId',
-  as: 'package',
-});
+// /**
+//  * Get all matches for a package
+//  * @param packageId The package ID
+//  */
+// export async function getMatchesForPackage(packageId: string): Promise<Match[]> {
+//   return await Match.findByPackageId(packageId);
+// }
 
-// Route - Match (One-to-Many)
-Route.hasMany(Match, {
-  foreignKey: 'routeId',
-  as: 'matches',
-});
-Match.belongsTo(Route, {
-  foreignKey: 'routeId',
-  as: 'route',
-});
+// /**
+//  * Get all matches for a route
+//  * @param routeId The route ID
+//  */
+// export async function getMatchesForRoute(routeId: string): Promise<Match[]> {
+//   return await Match.findByRouteId(routeId);
+// }
 
-// User - Payment (One-to-Many)
-User.hasMany(Payment, {
-  foreignKey: 'userId',
-  as: 'payments',
-});
-Payment.belongsTo(User, {
-  foreignKey: 'userId',
-  as: 'user',
-});
+// /**
+//  * Get all payments for a user
+//  * @param userId The user ID
+//  */
+// export async function getPaymentsForUser(userId: string): Promise<Payment[]> {
+//   return await Payment.findByUserId(userId);
+// }
 
-// Package - Payment (One-to-Many)
-Package.hasMany(Payment, {
-  foreignKey: 'packageId',
-  as: 'payments',
-});
-Payment.belongsTo(Package, {
-  foreignKey: 'packageId',
-  as: 'package',
-});
+// /**
+//  * Get all payments for a package
+//  * @param packageId The package ID
+//  */
+// export async function getPaymentsForPackage(packageId: string): Promise<Payment[]> {
+//   return await Payment.findByPackageId(packageId);
+// }
 
-// Match - Payment (One-to-Many)
-Match.hasMany(Payment, {
-  foreignKey: 'matchId',
-  as: 'payments',
-});
-Payment.belongsTo(Match, {
-  foreignKey: 'matchId',
-  as: 'match',
-});
+// /**
+//  * Get all payments for a match
+//  * @param matchId The match ID
+//  */
+// export async function getPaymentsForMatch(matchId: string): Promise<Payment[]> {
+//   return await Payment.findByMatchId(matchId);
+// }
 
-// Package - Rating (One-to-Many)
-Package.hasMany(Rating, {
-  foreignKey: 'packageId',
-  as: 'ratings',
-});
-Rating.belongsTo(Package, {
-  foreignKey: 'packageId',
-  as: 'package',
-});
+// /**
+//  * Get all ratings for a package
+//  * @param packageId The package ID
+//  */
+// export async function getRatingsForPackage(packageId: string): Promise<Rating[]> {
+//   return await Rating.findByPackageId(packageId);
+// }
 
-// User - Rating (From User) (One-to-Many)
-User.hasMany(Rating, {
-  foreignKey: 'fromUserId',
-  as: 'givenRatings',
-});
-Rating.belongsTo(User, {
-  foreignKey: 'fromUserId',
-  as: 'fromUser',
-});
+// /**
+//  * Get all ratings given by a user
+//  * @param userId The user ID who gave the ratings
+//  */
+// export async function getGivenRatings(userId: string): Promise<Rating[]> {
+//   return await Rating.findByFromUserId(userId);
+// }
 
-// User - Rating (To User) (One-to-Many)
-User.hasMany(Rating, {
-  foreignKey: 'toUserId',
-  as: 'receivedRatings',
-});
-Rating.belongsTo(User, {
-  foreignKey: 'toUserId',
-  as: 'toUser',
-});
+// /**
+//  * Get all ratings received by a user
+//  * @param userId The user ID who received the ratings
+//  */
+// export async function getReceivedRatings(userId: string): Promise<Rating[]> {
+//   return await Rating.findByToUserId(userId);
+// }
 
-// User - Notification (One-to-Many)
-User.hasMany(Notification, {
-  foreignKey: 'userId',
-  as: 'notifications',
-});
-Notification.belongsTo(User, {
-  foreignKey: 'userId',
-  as: 'user',
-});
+// /**
+//  * Get all notifications for a user
+//  * @param userId The user ID
+//  */
+// export async function getNotificationsForUser(userId: string): Promise<Notification[]> {
+//   return await Notification.findByUserId(userId);
+// }
 
-// Package - Notification (One-to-Many)
-Package.hasMany(Notification, {
-  foreignKey: 'packageId',
-  as: 'notifications',
-});
-Notification.belongsTo(Package, {
-  foreignKey: 'packageId',
-  as: 'package',
-});
+// /**
+//  * Get all notifications for a package
+//  * @param packageId The package ID
+//  */
+// export async function getNotificationsForPackage(packageId: string): Promise<Notification[]> {
+//   return await Notification.findByPackageId(packageId);
+// }
 
-// Match - Notification (One-to-Many)
-Match.hasMany(Notification, {
-  foreignKey: 'matchId',
-  as: 'notifications',
-});
-Notification.belongsTo(Match, {
-  foreignKey: 'matchId',
-  as: 'match',
-});
+// /**
+//  * Get all notifications for a match
+//  * @param matchId The match ID
+//  */
+// export async function getNotificationsForMatch(matchId: string): Promise<Notification[]> {
+//   return await Notification.findByMatchId(matchId);
+// }
 
+// // Export all models
 export {
   User,
-  CarrierProfile,
-  Package,
-  Route,
-  Match,
-  Payment,
-  Rating,
-  Notification,
+//   CarrierProfile,
+//   Package,
+//   Route,
+//   Match,
+//   Payment,
+//   Rating,
+//   Notification,
 };

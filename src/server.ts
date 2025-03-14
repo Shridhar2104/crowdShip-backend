@@ -7,6 +7,7 @@ import { connectDatabase } from './config/database';
 import { initializeSocketIO } from './config/socket';
 import { initializeRedis } from './config/redis';
 
+
 // Create HTTP server
 const server = http.createServer(app);
 
@@ -30,7 +31,7 @@ const startServer = async () => {
   try {
     // Connect to databases
     await connectDatabase();
-    await initializeRedis();
+    // await initializeRedis();
 
     // Start listening
     server.listen(port, () => {
@@ -43,27 +44,27 @@ const startServer = async () => {
   }
 };
 
-// Handle unhandled promise rejections
-process.on('unhandledRejection', (reason: Error, promise: Promise<any>) => {
-  logger.error('Unhandled Rejection at:', promise, 'reason:', reason);
-  // Close server & exit process
-  server.close(() => process.exit(1));
-});
+// // Handle unhandled promise rejections
+// process.on('unhandledRejection', (reason: Error, promise: Promise<any>) => {
+//   logger.error('Unhandled Rejection at:', promise, 'reason:', reason);
+//   // Close server & exit process
+//   server.close(() => process.exit(1));
+// });
 
-// Handle uncaught exceptions
-process.on('uncaughtException', (error: Error) => {
-  logger.error('Uncaught Exception:', error);
-  // Close server & exit process
-  server.close(() => process.exit(1));
-});
+// // Handle uncaught exceptions
+// process.on('uncaughtException', (error: Error) => {
+//   logger.error('Uncaught Exception:', error);
+//   // Close server & exit process
+//   server.close(() => process.exit(1));
+// });
 
-// Handle SIGTERM
-process.on('SIGTERM', () => {
-  logger.info('SIGTERM received. Shutting down gracefully');
-  server.close(() => {
-    logger.info('Process terminated');
-  });
-});
+// // Handle SIGTERM
+// process.on('SIGTERM', () => {
+//   logger.info('SIGTERM received. Shutting down gracefully');
+//   server.close(() => {
+//     logger.info('Process terminated');
+//   });
+// });
 
 // Start the server
 startServer();
