@@ -6,7 +6,7 @@ import { generateTokens, verifyToken } from '../utils/jwt';
 import { BadRequestError, NotFoundError, UnauthorizedError } from '../utils/errorClasses';
 import { logger } from '../utils/logger';
 import { config } from '../config';
-import { Op } from 'sequelize';
+import { db,Timestamp } from '../config/database';
 
 /**
  * Register a new user
@@ -17,14 +17,18 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
     const { firstName, lastName, email, password, phoneNumber, role } = req.body;
 
     // Check if user with email already exists
-    const existingUser = await User.findOne({ where: { email } });
+    const existingUser = await User.findByEmail(email);
     if (existingUser) {
       throw new BadRequestError('User with this email already exists');
     }
 
     // Check if user with phone number already exists
-    const existingPhoneUser = await User.findOne({ where: { phoneNumber } });
-    if (existingPhoneUser) {
+    const phoneUsers = await db.collection('users')
+      .where('phoneNumber', '==', phoneNumber)
+      .limit(1)
+      .get();
+    
+    if (!phoneUsers.empty) {
       throw new BadRequestError('User with this phone number already exists');
     }
 
@@ -36,7 +40,7 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
       firstName,
       lastName,
       email,
-      password, // Will be hashed by model hook
+      password, // Will be hashed in the User class
       phoneNumber,
       role: role || 'sender', // Default role is sender
       verificationToken,
@@ -65,7 +69,7 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
     const { email, password } = req.body;
 
     // Find user by email
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findByEmail(email);
     if (!user) {
       throw new UnauthorizedError('Invalid credentials');
     }
@@ -77,8 +81,7 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
     }
 
     // Update last login time
-    user.lastLoginAt = new Date();
-    await user.save();
+    await user.updateLoginTimestamp();
 
     // Generate tokens
     const tokens = generateTokens({
@@ -87,7 +90,7 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
       role: user.role,
     });
 
-    // TODO: Store refresh token in database or Redis for management
+    // TODO: Store refresh token in Firestore or Redis for management
 
     // Send response
     res.status(200).json({
@@ -118,7 +121,7 @@ export const refreshToken = async (req: Request, res: Response, next: NextFuncti
     // Verify refresh token
     const decoded = await verifyToken(refreshToken, config.jwt.refreshSecret as string);
 
-    // TODO: Check if refresh token is in database/Redis and not expired/revoked
+    // TODO: Check if refresh token is in Firestore/Redis and not expired/revoked
 
     // Generate new tokens
     const tokens = generateTokens({
@@ -127,7 +130,7 @@ export const refreshToken = async (req: Request, res: Response, next: NextFuncti
       role: decoded.role,
     });
 
-    // TODO: Update refresh token in database/Redis
+    // TODO: Update refresh token in Firestore/Redis
 
     // Send response
     res.status(200).json({
@@ -148,7 +151,7 @@ export const refreshToken = async (req: Request, res: Response, next: NextFuncti
  */
 export const logoutUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    // TODO: Invalidate refresh token in database/Redis
+    // TODO: Invalidate refresh token in Firestore/Redis
 
     res.status(200).json({
       success: true,
@@ -171,7 +174,7 @@ export const getCurrentUser = async (req: Request, res: Response, next: NextFunc
       throw new UnauthorizedError('Not authenticated');
     }
 
-    const user = await User.findByPk(userId);
+    const user = await User.findById(userId);
     if (!user) {
       throw new NotFoundError('User not found');
     }
@@ -198,7 +201,7 @@ export const updateCurrentUser = async (req: Request, res: Response, next: NextF
       throw new UnauthorizedError('Not authenticated');
     }
 
-    const user = await User.findByPk(userId);
+    const user = await User.findById(userId);
     if (!user) {
       throw new NotFoundError('User not found');
     }
@@ -238,7 +241,7 @@ export const updatePassword = async (req: Request, res: Response, next: NextFunc
       throw new BadRequestError('Current password and new password are required');
     }
 
-    const user = await User.findByPk(userId);
+    const user = await User.findById(userId);
     if (!user) {
       throw new NotFoundError('User not found');
     }
@@ -250,7 +253,7 @@ export const updatePassword = async (req: Request, res: Response, next: NextFunc
     }
 
     // Update password
-    user.password = newPassword; // Will be hashed by model hook
+    user.password = newPassword; // Will be hashed by the save method
     await user.save();
 
     res.status(200).json({
@@ -274,7 +277,7 @@ export const forgotPassword = async (req: Request, res: Response, next: NextFunc
       throw new BadRequestError('Email is required');
     }
 
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findByEmail(email);
     if (!user) {
       // Still return success for security reasons
       res.status(200).json({
@@ -286,11 +289,11 @@ export const forgotPassword = async (req: Request, res: Response, next: NextFunc
 
     // Generate reset token
     const resetToken = crypto.randomBytes(32).toString('hex');
-    const resetTokenExpiry = new Date(Date.now() + 3600000); // 1 hour
+    const resetPasswordExpires = new Date(Date.now() + 3600000); // 1 hour
 
     // Update user with reset token and expiry
     user.resetPasswordToken = resetToken;
-    user.resetPasswordExpires = resetTokenExpiry;
+    user.resetPasswordExpires = resetPasswordExpires;
     await user.save();
 
     // TODO: Send password reset email
@@ -310,6 +313,10 @@ export const forgotPassword = async (req: Request, res: Response, next: NextFunc
  * Reset password with token
  * @route POST /api/v1/users/reset-password/:token
  */
+/**
+ * Reset password with token
+ * @route POST /api/v1/users/reset-password/:token
+ */
 export const resetPassword = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { token } = req.params;
@@ -319,22 +326,44 @@ export const resetPassword = async (req: Request, res: Response, next: NextFunct
       throw new BadRequestError('New password is required');
     }
 
-    const user = await User.findOne({
-      where: {
-        resetPasswordToken: token,
-        resetPasswordExpires: { [Op.gt]: new Date() }, // Token not expired
-      },
-    });
+    // Query for user with matching token
+    const usersSnapshot = await db.collection('users')
+      .where('resetPasswordToken', '==', token)
+      .get();
 
-    if (!user) {
+    if (usersSnapshot.empty) {
+      throw new BadRequestError('Password reset token is invalid or has expired');
+    }
+
+    // Find valid user with non-expired token
+    let validUser = null;
+
+    for (const doc of usersSnapshot.docs) {
+      const userData = doc.data();
+      
+      // Check if resetPasswordExpires exists and is not expired
+      if (userData.resetPasswordExpires) {
+        // Convert Firestore timestamp to Date if needed
+        const expiryDate = userData.resetPasswordExpires instanceof Timestamp ? 
+          userData.resetPasswordExpires.toDate() : new Date(userData.resetPasswordExpires);
+        
+        if (expiryDate > new Date()) {
+          // Create a complete user object with all required fields
+          validUser = await User.findById(doc.id);
+          break;
+        }
+      }
+    }
+
+    if (!validUser) {
       throw new BadRequestError('Password reset token is invalid or has expired');
     }
 
     // Update password and clear reset token
-    user.password = password; // Will be hashed by model hook
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpires = undefined;
-    await user.save();
+    validUser.password = password; // Will be hashed during save
+    validUser.resetPasswordToken = undefined;
+    validUser.resetPasswordExpires = undefined;
+    await validUser.save();
 
     // TODO: Send password changed confirmation email
 
@@ -355,14 +384,25 @@ export const verifyEmail = async (req: Request, res: Response, next: NextFunctio
   try {
     const { token } = req.params;
 
-    const user = await User.findOne({
-      where: {
-        verificationToken: token,
-      },
-    });
+    // Query for user with matching verification token
+    const usersSnapshot = await db.collection('users')
+      .where('verificationToken', '==', token)
+      .limit(1)
+      .get();
 
-    if (!user) {
+    if (usersSnapshot.empty) {
       throw new BadRequestError('Email verification token is invalid');
+    }
+
+    // Get the first matching user's ID
+    const userDoc = usersSnapshot.docs[0];
+    const userId = userDoc.id;
+    
+    // Use the User.findById method to get a properly constructed User object
+    const user = await User.findById(userId);
+    
+    if (!user) {
+      throw new NotFoundError('User not found');
     }
 
     // Mark user as verified and clear verification token
@@ -391,7 +431,7 @@ export const resendVerification = async (req: Request, res: Response, next: Next
       throw new UnauthorizedError('Not authenticated');
     }
 
-    const user = await User.findByPk(userId);
+    const user = await User.findById(userId);
     if (!user) {
       throw new NotFoundError('User not found');
     }
@@ -425,15 +465,26 @@ export const getAllUsers = async (req: Request, res: Response, next: NextFunctio
     // Parse query parameters for pagination
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
-    const offset = (page - 1) * limit;
-
-    // Get total count and users
-    const { count, rows: users } = await User.findAndCountAll({
-      limit,
-      offset,
-      order: [['createdAt', 'DESC']],
-    });
-
+    
+    // Get users from Firestore with pagination
+    const usersSnapshot = await db.collection('users')
+      .orderBy('createdAt', 'desc')
+      .limit(limit)
+      .offset((page - 1) * limit)
+      .get();
+    
+    // Convert to User instances
+    const users: User[] = [];
+    const userPromises = usersSnapshot.docs.map(doc => User.findById(doc.id));
+    const userResults = await Promise.all(userPromises);
+    
+    // Filter out any null results (in case a user was deleted during the query)
+    users.push(...userResults.filter(user => user !== null) as User[]);
+    
+    // Get total count for pagination
+    const countSnapshot = await db.collection('users').count().get();
+    const count = countSnapshot.data().count;
+    
     // Map users to public JSON
     const usersData = users.map(user => user.toPublicJSON());
 
@@ -460,7 +511,7 @@ export const getUserById = async (req: Request, res: Response, next: NextFunctio
   try {
     const { id } = req.params;
 
-    const user = await User.findByPk(id);
+    const user = await User.findById(id);
     if (!user) {
       throw new NotFoundError('User not found');
     }
@@ -499,7 +550,7 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
     const { id } = req.params;
     const { firstName, lastName, email, phoneNumber, role, isVerified } = req.body;
 
-    const user = await User.findByPk(id);
+    const user = await User.findById(id);
     if (!user) {
       throw new NotFoundError('User not found');
     }
@@ -532,12 +583,15 @@ export const deleteUser = async (req: Request, res: Response, next: NextFunction
   try {
     const { id } = req.params;
 
-    const user = await User.findByPk(id);
+    const user = await User.findById(id);
     if (!user) {
       throw new NotFoundError('User not found');
     }
 
-    await user.destroy();
+    const success = await User.delete(id);
+    if (!success) {
+      throw new Error('Failed to delete user');
+    }
 
     res.status(200).json({
       success: true,
