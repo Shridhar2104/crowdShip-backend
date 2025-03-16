@@ -5,7 +5,7 @@ import Package, { PackageStatus } from '../models/Packages';
 import Match from '../models/Match';
 import User from '../models/User';
 import '../models/PaymentMethod';
-import Notification, { NotificationType, NotificationChannel } from '../models/Notification';
+import Notification, { NotificationType, NotificationChannel } from '../models/notificationService';
 import {  
   NotFoundError, 
   BadRequestError, 
