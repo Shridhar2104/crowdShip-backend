@@ -1,5 +1,5 @@
-import { Model, DataTypes, Optional } from 'sequelize';
-import { sequelize } from '../config/database';
+import { db } from '../config/database';
+import { FieldValue } from 'firebase-admin/firestore';
 
 // Route frequency enum
 export enum RouteFrequency {
@@ -39,39 +39,62 @@ export interface RouteAttributes {
   updatedAt?: Date;
 }
 
-// Interface for creating a new Route
-export interface RouteCreationAttributes extends Optional<RouteAttributes, 'id' | 'createdAt' | 'updatedAt'> {}
-
 // Route model class
-class Route extends Model<RouteAttributes, RouteCreationAttributes> implements RouteAttributes {
-  public id!: string;
-  public carrierId!: string;
-  public title!: string;
-  public startAddress!: string;
-  public startLatitude!: number;
-  public startLongitude!: number;
-  public endAddress!: string;
-  public endLatitude!: number;
-  public endLongitude!: number;
+class Route implements RouteAttributes {
+  public id: string;
+  public carrierId: string;
+  public title: string;
+  public startAddress: string;
+  public startLatitude: number;
+  public startLongitude: number;
+  public endAddress: string;
+  public endLatitude: number;
+  public endLongitude: number;
   public waypoints?: string;
-  public distance!: number;
-  public estimatedDuration!: number;
-  public startTime!: Date;
-  public endTime!: Date;
-  public frequency!: RouteFrequency;
+  public distance: number;
+  public estimatedDuration: number;
+  public startTime: Date;
+  public endTime: Date;
+  public frequency: RouteFrequency;
   public customFrequency?: string;
-  public isActive!: boolean;
-  public maxDetourDistance!: number;
-  public maxDetourTime!: number;
-  public availableCapacity!: number;
+  public isActive: boolean;
+  public maxDetourDistance: number;
+  public maxDetourTime: number;
+  public availableCapacity: number;
   public routePolyline?: string;
   public notes?: string;
   public daysOfWeek?: string;
-  
-  // Timestamps
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-  
+  public createdAt?: Date;
+  public updatedAt?: Date;
+
+  constructor(data: RouteAttributes) {
+    this.id = data.id;
+    this.carrierId = data.carrierId;
+    this.title = data.title;
+    this.startAddress = data.startAddress;
+    this.startLatitude = data.startLatitude;
+    this.startLongitude = data.startLongitude;
+    this.endAddress = data.endAddress;
+    this.endLatitude = data.endLatitude;
+    this.endLongitude = data.endLongitude;
+    this.waypoints = data.waypoints;
+    this.distance = data.distance;
+    this.estimatedDuration = data.estimatedDuration;
+    this.startTime = data.startTime;
+    this.endTime = data.endTime;
+    this.frequency = data.frequency;
+    this.customFrequency = data.customFrequency;
+    this.isActive = data.isActive;
+    this.maxDetourDistance = data.maxDetourDistance;
+    this.maxDetourTime = data.maxDetourTime;
+    this.availableCapacity = data.availableCapacity;
+    this.routePolyline = data.routePolyline;
+    this.notes = data.notes;
+    this.daysOfWeek = data.daysOfWeek;
+    this.createdAt = data.createdAt;
+    this.updatedAt = data.updatedAt;
+  }
+
   // Get waypoints as array of objects
   public get waypointsArray(): Array<{latitude: number; longitude: number; address: string}> {
     return this.waypoints ? JSON.parse(this.waypoints) : [];
@@ -104,113 +127,118 @@ class Route extends Model<RouteAttributes, RouteCreationAttributes> implements R
     
     return false;
   }
-}
 
-Route.init(
-  {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-    },
-    carrierId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
-    },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    startAddress: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    startLatitude: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    startLongitude: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    endAddress: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    endLatitude: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    endLongitude: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    waypoints: {
-      type: DataTypes.TEXT, // JSON string with waypoints
-    },
-    distance: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    estimatedDuration: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    startTime: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    endTime: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    frequency: {
-      type: DataTypes.ENUM(...Object.values(RouteFrequency)),
-      allowNull: false,
-      defaultValue: RouteFrequency.ONE_TIME,
-    },
-    customFrequency: {
-      type: DataTypes.TEXT, // JSON string with custom frequency details
-    },
-    isActive: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
-    maxDetourDistance: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-      defaultValue: 2.0, // Default 2km
-    },
-    maxDetourTime: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 15, // Default 15 minutes
-    },
-    availableCapacity: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-      defaultValue: 5.0, // Default 5kg
-    },
-    routePolyline: {
-      type: DataTypes.TEXT, // Encoded polyline representation of route
-    },
-    notes: {
-      type: DataTypes.TEXT,
-    },
-    daysOfWeek: {
-      type: DataTypes.TEXT, // JSON array of days (0-6, 0 being Sunday)
-    },
-  },
-  {
-    sequelize,
-    modelName: 'Route',
-    tableName: 'routes',
-    timestamps: true,
+  // Create a new route
+  public async create(): Promise<string> {
+    const routesRef = db.collection('routes');
+    const routeData = {
+      carrierId: this.carrierId,
+      title: this.title,
+      startAddress: this.startAddress,
+      startLatitude: this.startLatitude,
+      startLongitude: this.startLongitude,
+      endAddress: this.endAddress,
+      endLatitude: this.endLatitude,
+      endLongitude: this.endLongitude,
+      waypoints: this.waypoints,
+      distance: this.distance,
+      estimatedDuration: this.estimatedDuration,
+      startTime: this.startTime,
+      endTime: this.endTime,
+      frequency: this.frequency,
+      customFrequency: this.customFrequency,
+      isActive: this.isActive,
+      maxDetourDistance: this.maxDetourDistance,
+      maxDetourTime: this.maxDetourTime,
+      availableCapacity: this.availableCapacity,
+      routePolyline: this.routePolyline,
+      notes: this.notes,
+      daysOfWeek: this.daysOfWeek,
+      createdAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp()
+    };
+    
+    const docRef = await routesRef.add(routeData);
+    this.id = docRef.id;
+    return docRef.id;
   }
-);
+
+  // Update an existing route
+  public async update(): Promise<void> {
+    if (!this.id) {
+      throw new Error('Route ID is required for update');
+    }
+
+    const routeRef = db.collection('routes').doc(this.id);
+    
+    const updateData = {
+      carrierId: this.carrierId,
+      title: this.title,
+      startAddress: this.startAddress,
+      startLatitude: this.startLatitude,
+      startLongitude: this.startLongitude,
+      endAddress: this.endAddress,
+      endLatitude: this.endLatitude,
+      endLongitude: this.endLongitude,
+      waypoints: this.waypoints,
+      distance: this.distance,
+      estimatedDuration: this.estimatedDuration,
+      startTime: this.startTime,
+      endTime: this.endTime,
+      frequency: this.frequency,
+      customFrequency: this.customFrequency,
+      isActive: this.isActive,
+      maxDetourDistance: this.maxDetourDistance,
+      maxDetourTime: this.maxDetourTime,
+      availableCapacity: this.availableCapacity,
+      routePolyline: this.routePolyline,
+      notes: this.notes,
+      daysOfWeek: this.daysOfWeek,
+      updatedAt: FieldValue.serverTimestamp()
+    };
+
+    await routeRef.update(updateData);
+  }
+
+  // Delete a route
+  public async delete(): Promise<void> {
+    if (!this.id) {
+      throw new Error('Route ID is required for deletion');
+    }
+
+    const routeRef = db.collection('routes').doc(this.id);
+    await routeRef.delete();
+  }
+
+  // Fetch a route by ID
+  public static async findById(id: string): Promise<Route | null> {
+    const routeRef = db.collection('routes').doc(id);
+    const doc = await routeRef.get();
+  
+    if (!doc.exists) {
+      return null;
+    }
+  
+    const data = doc.data() as RouteAttributes;
+    return new Route({
+      ...data,
+      id: doc.id
+    });
+  }
+
+  // Find routes by carrier ID
+  public static async findByCarrierId(carrierId: string): Promise<Route[]> {
+    const routesRef = db.collection('routes');
+    const snapshot = await routesRef.where('carrierId', '==', carrierId).get();
+    
+    return snapshot.docs.map(doc => {
+      const data = doc.data() as RouteAttributes;
+      return new Route({
+        ...data,
+        id: doc.id
+      });
+    });
+  }
+}
 
 export default Route;

@@ -1,5 +1,4 @@
-import { Model, DataTypes, Optional } from 'sequelize';
-import { sequelize } from '../config/database';
+import { Timestamp, FieldValue } from 'firebase-admin/firestore';
 
 // Rating type enum
 export enum RatingType {
@@ -9,8 +8,8 @@ export enum RatingType {
   SYSTEM_TO_SENDER = 'system_to_sender'      // Automatic system rating for sender
 }
 
-// Rating attributes interface
-export interface RatingAttributes {
+// Rating interface
+export interface Rating {
   id: string;
   packageId: string;
   fromUserId: string;  // User who gave the rating
@@ -19,113 +18,188 @@ export interface RatingAttributes {
   score: number;       // Rating score (1-5)
   comment?: string;    // Optional comment with the rating
   isAnonymous: boolean;// Whether the rating is anonymous
-  tags?: string;       // JSON array of tags/categories for the rating
+  tags?: string[];     // Array of tags/categories for the rating (note: stored directly as array in Firestore)
   isReviewed: boolean; // Whether the rating has been reviewed by admins
   isHidden: boolean;   // Whether the rating is hidden from public view
   adminNotes?: string; // Admin notes about this rating
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Timestamp | FieldValue;
+  updatedAt: Timestamp | FieldValue;
 }
 
-// Interface for creating a new Rating
-export interface RatingCreationAttributes extends Optional<RatingAttributes, 'id' | 'createdAt' | 'updatedAt'> {}
-
-// Rating model class
-class Rating extends Model<RatingAttributes, RatingCreationAttributes> implements RatingAttributes {
-  public id!: string;
-  public packageId!: string;
-  public fromUserId!: string;
-  public toUserId!: string;
-  public type!: RatingType;
-  public score!: number;
-  public comment?: string;
-  public isAnonymous!: boolean;
-  public tags?: string;
-  public isReviewed!: boolean;
-  public isHidden!: boolean;
-  public adminNotes?: string;
-  
-  // Timestamps
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-  
-  // Get tags as array
-  public get tagsArray(): string[] {
-    return this.tags ? JSON.parse(this.tags) : [];
-  }
+// Report interface for rating reports
+export interface RatingReport {
+  id: string;
+  ratingId: string;
+  reportedBy: string;
+  reason: string;
+  details?: string;
+  status: 'pending' | 'approved' | 'rejected';
+  reviewedBy?: string;
+  reviewedAt?: Timestamp;
+  createdAt: Timestamp | FieldValue;
+  updatedAt: Timestamp | FieldValue;
 }
 
-Rating.init(
-  {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-    },
-    packageId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: 'packages',
-        key: 'id',
-      },
-    },
-    fromUserId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
-    },
-    toUserId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
-    },
-    type: {
-      type: DataTypes.ENUM(...Object.values(RatingType)),
-      allowNull: false,
-    },
-    score: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        min: 1,
-        max: 5,
-      },
-    },
-    comment: {
-      type: DataTypes.TEXT,
-    },
-    isAnonymous: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
-    tags: {
-      type: DataTypes.TEXT, // JSON array of tags/categories
-    },
-    isReviewed: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
-    isHidden: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
-    adminNotes: {
-      type: DataTypes.TEXT,
-    },
-  },
-  {
-    sequelize,
-    modelName: 'Rating',
-    tableName: 'ratings',
-    timestamps: true,
-  }
-);
+// Rating summary interface for user rating statistics
+export interface RatingSummary {
+  userId: string;
+  averageScore: number;
+  totalRatings: number;
+  scoreDistribution: Record<number, number>;
+  ratingsByType: Record<string, number>;
+  recentRatings: Rating[];
+}
 
-export default Rating;
+/**
+ * Prepare rating data for creation
+ * Note: createdAt and updatedAt will be set by the createDocument function
+ */
+export function prepareRatingData(ratingData: Omit<Rating, 'id' | 'createdAt' | 'updatedAt'>): Omit<Rating, 'id' | 'createdAt' | 'updatedAt'> {
+  return {
+    ...ratingData,
+    // Default values
+    isAnonymous: ratingData.isAnonymous ?? false,
+    isReviewed: ratingData.isReviewed ?? false,
+    isHidden: ratingData.isHidden ?? false,
+    // If tags is undefined, set it to empty array
+    tags: ratingData.tags || []
+  };
+}
+
+/**
+ * Validate a rating score (1-5)
+ */
+export function isValidRatingScore(score: number): boolean {
+  return score >= 1 && score <= 5 && Number.isInteger(score);
+}
+
+/**
+ * Check if a rating is valid for submission
+ */
+export function isValidRating(rating: Partial<Rating>): boolean {
+  // Required fields
+  if (!rating.packageId || !rating.fromUserId || !rating.toUserId || !rating.type || rating.score === undefined) {
+    return false;
+  }
+  
+  // Score validation
+  if (!isValidRatingScore(rating.score)) {
+    return false;
+  }
+  
+  return true;
+}
+
+/**
+ * Create a report for an inappropriate rating
+ */
+export function prepareRatingReport(
+  ratingId: string, 
+  reportedBy: string, 
+  reason: string, 
+  details?: string
+): Omit<RatingReport, 'id' | 'createdAt' | 'updatedAt'> {
+  return {
+    ratingId,
+    reportedBy,
+    reason,
+    details,
+    status: 'pending'
+  };
+}
+
+/**
+ * Filter out sensitive information for anonymous ratings
+ */
+export function sanitizeRating(rating: Rating, forUserId?: string): Rating {
+  // Don't sanitize for admins, the rating author, or the recipient
+  if (
+    forUserId === 'admin' || 
+    forUserId === rating.fromUserId || 
+    forUserId === rating.toUserId
+  ) {
+    return rating;
+  }
+  
+  // If rating is anonymous, remove the author ID
+  if (rating.isAnonymous) {
+    return {
+      ...rating,
+      fromUserId: 'anonymous'
+    };
+  }
+  
+  return rating;
+}
+
+/**
+ * Calculate a rating summary for a user
+ */
+export function calculateRatingSummary(userId: string, ratings: Rating[]): RatingSummary {
+  if (ratings.length === 0) {
+    return {
+      userId,
+      averageScore: 0,
+      totalRatings: 0,
+      scoreDistribution: {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0
+      },
+      ratingsByType: {
+        [RatingType.SENDER_TO_CARRIER]: 0,
+        [RatingType.CARRIER_TO_SENDER]: 0,
+        [RatingType.SYSTEM_TO_CARRIER]: 0,
+        [RatingType.SYSTEM_TO_SENDER]: 0
+      },
+      recentRatings: []
+    };
+  }
+  
+  // Calculate average score
+  const totalScore = ratings.reduce((sum, rating) => sum + rating.score, 0);
+  const averageScore = totalScore / ratings.length;
+  
+  // Get score distribution
+  const scoreDistribution = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0
+  };
+  
+  ratings.forEach(rating => {
+    scoreDistribution[rating.score as keyof typeof scoreDistribution]++;
+  });
+  
+  // Get most recent ratings
+  // Sort by createdAt, handling that it might be a Timestamp or a FieldValue
+  const recentRatings = [...ratings]
+    .sort((a, b) => {
+      // Handle if createdAt is a Timestamp
+      if ('toMillis' in a.createdAt && 'toMillis' in b.createdAt) {
+        return b.createdAt.toMillis() - a.createdAt.toMillis();
+      }
+      // Default to keeping the original order if we can't compare
+      return 0;
+    })
+    .slice(0, 5);
+  
+  // Get ratings by type
+  const ratingsByType = Object.values(RatingType).reduce((acc, type) => {
+    acc[type] = ratings.filter(r => r.type === type).length;
+    return acc;
+  }, {} as Record<string, number>);
+  
+  return {
+    userId,
+    averageScore,
+    totalRatings: ratings.length,
+    scoreDistribution,
+    ratingsByType,
+    recentRatings
+  };
+}
