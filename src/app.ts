@@ -13,7 +13,7 @@ import userRoutes from './routes/userRoutes';
 import packageRoutes from './routes/packageRoutes';
 import routeRoutes from './routes/routeRoutes';
 import matchingRoutes from './routes/matchingRoutes';
-import paymentRoutes from './routes/paymentRoutes';
+// import paymentRoutes from './routes/paymentRoutes';
 import notificationRoutes from './routes/notificationRoutes';
 import ratingRoutes from './routes/ratingRoutes';
 
