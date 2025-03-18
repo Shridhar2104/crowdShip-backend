@@ -7,9 +7,9 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 export const config = {
   // Server configuration
   nodeEnv: process.env.NODE_ENV || 'development',
-  port: parseInt(process.env.PORT || '5000', 10),
+  port: parseInt(process.env.PORT || '5001', 10),
   apiVersion: process.env.API_VERSION || 'v1',
-  corsOrigin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  corsOrigin: process.env.CORS_ORIGIN || 'http://localhost:8081',
   
   // Database configuration
   database: {

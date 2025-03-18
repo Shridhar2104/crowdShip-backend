@@ -4,25 +4,45 @@ import { config } from './index';
 import { logger } from '../utils/logger';
 import * as path from 'path';
 import * as fs from 'fs';
+// At the top of your main file (before any other imports)
+import dotenv from 'dotenv';
 
-// Initialize Firebase Admin with service account JSON file
+dotenv.config({ path: path.resolve(__dirname, '../../.env.local') }); // Adjust path as needed
 const initializeFirebaseAdmin = () => {
   try {
-    // Path to your service account key file (in the root directory)
-    const serviceAccountPath = path.resolve(process.cwd(), 'firebase-key.json');
+    let serviceAccount;
     
-    // Read and parse the service account key file
-    const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
+    // Check if we have the base64 encoded service account
+    if (process.env.FIREBASE_SERVICE_ACCOUNT_BASE64) {
+      // Decode the base64 string to a JSON string
+      const decodedServiceAccount = Buffer.from(
+        process.env.FIREBASE_SERVICE_ACCOUNT_BASE64,
+        'base64'
+      ).toString('utf8');
+      
+      // Parse the JSON string to an object
+      serviceAccount = JSON.parse(decodedServiceAccount);
+    } else {
+      // Fallback to file for local development
+      try {
+        const serviceAccountPath = path.resolve(process.cwd(), 'firebase-key.json');
+        serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
+        logger.info('Firebase Admin initialized using local service account file');
+      } catch (fileError) {
+        logger.error('Failed to read local firebase-key.json:', fileError);
+        throw new Error('Firebase service account not found in environment variables or local file');
+      }
+    }
     
-    // Initialize Firebase if not already initialized
+    // Initialize Firebase with the service account
     const app = initializeApp({
       credential: cert(serviceAccount),
     });
     
-    logger.info('Firebase Admin initialized successfully using service account key file');
+    logger.info('Firebase Admin initialized successfully');
     return app;
   } catch (error: any) {
-    // If already initialized, Firebase throws an error
+    // Handle errors
     if (error.code === 'app/duplicate-app') {
       logger.warn('Firebase app already initialized');
       return initializeApp();
@@ -32,6 +52,7 @@ const initializeFirebaseAdmin = () => {
     throw error;
   }
 };
+
 
 // Firebase app instance
 export const firebaseApp = initializeFirebaseAdmin();
