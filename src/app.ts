@@ -21,10 +21,9 @@ const app: Express = express();
 
 // Security and utility middleware
 app.use(helmet());
-app.use(
-  cors({
-  })
-);
+
+app.use(cors({}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -61,18 +60,17 @@ app.get('/health', (req: Request, res: Response) => {
 const apiVersion = config.apiVersion;
 app.use(`/api/${apiVersion}/users`, userRoutes);
 
-// app.use(`/api/${apiVersion}/packages`, packageRoutes);
+app.use(`/api/${apiVersion}/packages`, packageRoutes);
  app.use(`/api/${apiVersion}/routes`, routeRoutes);
 app.use(`/api/${apiVersion}/matches`, matchingRoutes);
-// app.use(`/api/${apiVersion}/payments`, paymentRoutes);
-// app.use(`/api/${apiVersion}/notifications`, notificationRoutes);
+app.use(`/api/${apiVersion}/notifications`, notificationRoutes);
 app.use(`/api/${apiVersion}/ratings`, ratingRoutes);
 app.use(`/api/${apiVersion}/packages`, packageRoutes);
 // app.use(`/api/${apiVersion}/routes`, routeRoutes);
-// app.use(`/api/${apiVersion}/matches`, matchingRoutes);
+app.use(`/api/${apiVersion}/matches`, matchingRoutes);
 // app.use(`/api/${apiVersion}/payments`, paymentRoutes);
 app.use(`/api/${apiVersion}/notifications`, notificationRoutes);
-// app.use(`/api/${apiVersion}/ratings`, ratingRoutes);
+app.use(`/api/${apiVersion}/ratings`, ratingRoutes);
 
 
 // Error handling middleware
