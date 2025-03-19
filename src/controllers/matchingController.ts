@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import { db, Timestamp, queryDocuments, getDocument, createDocument, updateDocument } from '../config/database';
 import { Match, MatchStatus } from '../models/Match';
+import AIMatchingService from '../utils/intelligentMatchingService';
+import CarbonEmissionService from '../utils/CarbonEmissionService';
+import { logger } from '../utils/logger';
 
 // Collection names
 const MATCHES_COLLECTION = 'matches';
@@ -12,11 +15,6 @@ const USERS_COLLECTION = 'users';
  * @route POST /api/v1/matches
  * @access Private (admin)
  */
-
-
-
-
-
 export const createMatch = async (req: Request, res: Response) => {
   try {
     const matchData = req.body;
@@ -74,7 +72,7 @@ export const createMatch = async (req: Request, res: Response) => {
       data: newMatch
     });
   } catch (error) {
-    console.error('Error creating match:', error);
+    logger.error('Error creating match:', error);
     res.status(500).json({
       success: false,
       message: 'Error creating match',
@@ -123,11 +121,6 @@ export const getMatches = async (req: Request, res: Response) => {
       direction: (sortOrder === 'asc' ? 'asc' : 'desc') as 'asc' | 'desc'
     };
     
-    // Execute query with pagination
-    // Note: Firestore admin SDK doesn't support cursor pagination the same way
-    // We'll use limit/offset style pagination instead
-    const offset = (pageNumber - 1) * pageSize;
-    
     // Execute query
     let allMatches = await queryDocuments(
       MATCHES_COLLECTION,
@@ -136,7 +129,7 @@ export const getMatches = async (req: Request, res: Response) => {
     );
     
     // Apply manual pagination (not efficient for large datasets but works for demo)
-    const matches = allMatches.slice(offset, offset + pageSize);
+    const matches = allMatches.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
     const totalCount = allMatches.length;
     
     res.status(200).json({
@@ -150,7 +143,7 @@ export const getMatches = async (req: Request, res: Response) => {
       }
     });
   } catch (error) {
-    console.error('Error getting matches:', error);
+    logger.error('Error getting matches:', error);
     res.status(500).json({
       success: false,
       message: 'Error retrieving matches',
@@ -166,17 +159,15 @@ export const getMatches = async (req: Request, res: Response) => {
  */
 export const getUserMatches = async (req: Request, res: Response) => {
   try {
-
-    const useId = req.user?.id;
-    const useRole = req.user?.role;
-    if (!useId) {
-    return res.status(401).json({ error: 'Unauthorized' });
-   }
-   if(!useRole){
-    return res.status(401).json({ error: 'Unauthorized' });
-   }
-    const userId = useId;
-    const userRole = useRole;
+    const userId = req.user?.id;
+    const userRole = req.user?.role;
+    
+    if (!userId || !userRole) {
+      return res.status(401).json({ 
+        success: false,
+        message: 'User not authenticated or role not defined' 
+      });
+    }
     
     let matches = [];
     
@@ -204,8 +195,6 @@ export const getUserMatches = async (req: Request, res: Response) => {
       }
       
       // For each packageId, get matches
-      // Note: Firebase Admin doesn't support 'in' queries the same way
-      // We'll gather results for each package separately
       const matchPromises = packageIds.map(packageId => 
         queryDocuments(MATCHES_COLLECTION, [
           ['packageId', '==', packageId]
@@ -228,7 +217,7 @@ export const getUserMatches = async (req: Request, res: Response) => {
       data: matches
     });
   } catch (error) {
-    console.error('Error getting user matches:', error);
+    logger.error('Error getting user matches:', error);
     res.status(500).json({
       success: false,
       message: 'Error retrieving user matches',
@@ -245,16 +234,16 @@ export const getUserMatches = async (req: Request, res: Response) => {
 export const getMatchById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const useId = req.user?.id;
-    const useRole = req.user?.role;
-    if (!useId) {
-    return res.status(401).json({ error: 'Unauthorized' });
-   }
-   if(!useRole){
-    return res.status(401).json({ error: 'Unauthorized' });
-   }
-    const userId = useId;
-    const userRole = useRole;
+    const userId = req.user?.id;
+    const userRole = req.user?.role;
+    
+    if (!userId || !userRole) {
+      return res.status(401).json({ 
+        success: false,
+        message: 'User not authenticated or role not defined' 
+      });
+    }
+    
     const match = await getDocument(MATCHES_COLLECTION, id);
     
     if (!match) {
@@ -290,7 +279,7 @@ export const getMatchById = async (req: Request, res: Response) => {
       data: match
     });
   } catch (error) {
-    console.error('Error getting match:', error);
+    logger.error('Error getting match:', error);
     res.status(500).json({
       success: false,
       message: 'Error retrieving match',
@@ -300,24 +289,22 @@ export const getMatchById = async (req: Request, res: Response) => {
 };
 
 /**
- * Find carriers for a package
+ * Find carriers for a package using AI Matching
  * @route POST /api/v1/matches/find-carriers
  * @access Private (sender or admin)
  */
 export const findCarriers = async (req: Request, res: Response) => {
   try {
-
-
-    const useId = req.user?.id;
-    const useRole = req.user?.role;
-    if (!useId) {
-    return res.status(401).json({ error: 'Unauthorized' });
-   }
-   if(!useRole){
-    return res.status(401).json({ error: 'Unauthorized' });
-   }
-    const userId = useId;
-    const userRole = useRole;
+    const userId = req.user?.id;
+    const userRole = req.user?.role;
+    
+    if (!userId || !userRole) {
+      return res.status(401).json({ 
+        success: false,
+        message: 'User not authenticated or role not defined' 
+      });
+    }
+    
     const { packageId, radius = 10, maxCarriers = 5 } = req.body;
     
     if (!packageId) {
@@ -343,55 +330,77 @@ export const findCarriers = async (req: Request, res: Response) => {
         message: 'Unauthorized to find carriers for this package'
       });
     }
-    
-    // Find available carriers
-    // This would typically involve:
-    // 1. Geo-query to find carriers within radius of pickup location
-    // 2. Filter by carrier availability, vehicle type, etc.
-    // 3. Calculate matching scores
-    
-    // For this implementation, we'll simulate the carrier matching logic
-    // In a real app, you might use a more sophisticated algorithm or service
-    
-    // Find carriers
-    const carriers = await queryDocuments(USERS_COLLECTION, [
-      ['role', '==', 'carrier'],
-      ['active', '==', true]
-    ], undefined, 50); // Get a pool of carriers to filter from
-    
-    // Simulate matching algorithm
-    // In a real app, this would be more complex and consider:
-    // - Geographic proximity
-    // - Carrier ratings
-    // - Package size/weight vs vehicle capacity
-    // - Carrier schedule/availability
-    // - Historical performance
-    const matchedCarriers = carriers
-      .map(carrier => {
-        // Random score between 50-100 for simulation
-        const score = Math.floor(Math.random() * 51) + 50;
-        
-        // Simulate detour calculation
-        const detourDistance = Math.random() * radius;
-        const detourTime = Math.floor(detourDistance * 3); // ~3 min per km
-        
-        return {
-          carrierId: carrier.id,
-          carrierName: carrier.name,
-          score,
-          detourDistance,
-          detourTime
-        };
-      })
-      .sort((a, b) => b.score - a.score)
-      .slice(0, maxCarriers);
-    
-    res.status(200).json({
-      success: true,
-      data: matchedCarriers
-    });
+
+    // Use AI Matching Service to find optimal carriers
+    try {
+      const matchedCarriers = await AIMatchingService.findOptimalCarriers(
+        packageId, 
+        Number(radius), 
+        Number(maxCarriers)
+      );
+
+      // Transform to include more carrier details for the frontend
+      const enrichedMatches = [];
+      
+      for (const match of matchedCarriers) {
+        const carrierData = await getDocument(USERS_COLLECTION, match.carrierId);
+        if (carrierData) {
+          enrichedMatches.push({
+            ...match,
+            carrierName: carrierData.name,
+            carrierRating: carrierData.rating,
+            carrierVehicleType: carrierData.vehicleType,
+            estimatedCarbonSavings: await CarbonEmissionService.estimateEmissionSavings(
+              packageId, 
+              match.carrierId,
+              match.routeDeviation.distance
+            )
+          });
+        }
+      }
+      
+      res.status(200).json({
+        success: true,
+        data: enrichedMatches
+      });
+    } catch (error) {
+      logger.error('Error in AI matching:', error);
+      
+      // Fallback to simpler matching if AI fails
+      const carriers = await queryDocuments(USERS_COLLECTION, [
+        ['role', '==', 'carrier'],
+        ['active', '==', true]
+      ], undefined, 50);
+      
+      // Simple matching algorithm - simulate scores
+      const matchedCarriers = carriers
+        .map(carrier => {
+          const score = Math.floor(Math.random() * 51) + 50;
+          const detourDistance = Math.random() * Number(radius);
+          const detourTime = Math.floor(detourDistance * 3);
+          
+          return {
+            carrierId: carrier.id,
+            carrierName: carrier.name,
+            score,
+            compensation: 50 + (detourDistance * 10),
+            routeDeviation: {
+              distance: detourDistance,
+              time: detourTime
+            }
+          };
+        })
+        .sort((a, b) => b.score - a.score)
+        .slice(0, Number(maxCarriers));
+      
+      res.status(200).json({
+        success: true,
+        data: matchedCarriers,
+        note: "AI matching failed, falling back to simple matching algorithm"
+      });
+    }
   } catch (error) {
-    console.error('Error finding carriers:', error);
+    logger.error('Error finding carriers:', error);
     res.status(500).json({
       success: false,
       message: 'Error finding carriers',
@@ -407,11 +416,16 @@ export const findCarriers = async (req: Request, res: Response) => {
  */
 export const acceptMatch = async (req: Request, res: Response) => {
   try {
-
-
     const { id } = req.params;
     const carrierId = req.user?.id;
     const { notes } = req.body;
+    
+    if (!carrierId) {
+      return res.status(401).json({ 
+        success: false,
+        message: 'User not authenticated' 
+      });
+    }
     
     // Get the match
     const match = await getDocument(MATCHES_COLLECTION, id);
@@ -462,13 +476,16 @@ export const acceptMatch = async (req: Request, res: Response) => {
     // Get updated match
     const updatedMatch = await getDocument(MATCHES_COLLECTION, id);
     
+    // Update the match success feedback for AI model
+    await AIMatchingService.updateModelWithFeedback(id, true, 'Match accepted');
+    
     res.status(200).json({
       success: true,
       data: updatedMatch,
       message: 'Match accepted successfully'
     });
   } catch (error) {
-    console.error('Error accepting match:', error);
+    logger.error('Error accepting match:', error);
     res.status(500).json({
       success: false,
       message: 'Error accepting match',
@@ -487,6 +504,13 @@ export const rejectMatch = async (req: Request, res: Response) => {
     const { id } = req.params;
     const carrierId = req.user?.id;
     const { notes } = req.body;
+    
+    if (!carrierId) {
+      return res.status(401).json({ 
+        success: false,
+        message: 'User not authenticated' 
+      });
+    }
     
     // Get the match
     const match = await getDocument(MATCHES_COLLECTION, id);
@@ -524,13 +548,16 @@ export const rejectMatch = async (req: Request, res: Response) => {
     // Get updated match
     const updatedMatch = await getDocument(MATCHES_COLLECTION, id);
     
+    // Update the match failure feedback for AI model
+    await AIMatchingService.updateModelWithFeedback(id, false, notes || 'Match rejected');
+    
     res.status(200).json({
       success: true,
       data: updatedMatch,
       message: 'Match rejected successfully'
     });
   } catch (error) {
-    console.error('Error rejecting match:', error);
+    logger.error('Error rejecting match:', error);
     res.status(500).json({
       success: false,
       message: 'Error rejecting match',
@@ -550,6 +577,13 @@ export const cancelMatch = async (req: Request, res: Response) => {
     const userId = req.user?.id;
     const userRole = req.user?.role;
     const { reason } = req.body;
+    
+    if (!userId || !userRole) {
+      return res.status(401).json({ 
+        success: false,
+        message: 'User not authenticated or role not defined' 
+      });
+    }
     
     // Get the match
     const match = await getDocument(MATCHES_COLLECTION, id);
@@ -611,13 +645,16 @@ export const cancelMatch = async (req: Request, res: Response) => {
     // Get updated match
     const updatedMatch = await getDocument(MATCHES_COLLECTION, id);
     
+    // Update AI model with cancellation feedback
+    await AIMatchingService.updateModelWithFeedback(id, false, notes);
+    
     res.status(200).json({
       success: true,
       data: updatedMatch,
       message: 'Match cancelled successfully'
     });
   } catch (error) {
-    console.error('Error cancelling match:', error);
+    logger.error('Error cancelling match:', error);
     res.status(500).json({
       success: false,
       message: 'Error cancelling match',
@@ -636,6 +673,13 @@ export const getPackageMatches = async (req: Request, res: Response) => {
     const { packageId } = req.params;
     const userId = req.user?.id;
     const userRole = req.user?.role;
+    
+    if (!userId || !userRole) {
+      return res.status(401).json({ 
+        success: false,
+        message: 'User not authenticated or role not defined' 
+      });
+    }
     
     // Verify package exists
     const packageDoc = await getDocument(PACKAGES_COLLECTION, packageId);
@@ -672,12 +716,26 @@ export const getPackageMatches = async (req: Request, res: Response) => {
       matches = matches.filter(match => match.carrierId === userId);
     }
     
+    // For each match, get estimated carbon savings
+    const matchesWithCarbon = await Promise.all(matches.map(async (match) => {
+      const estimatedSavings = await CarbonEmissionService.estimateEmissionSavings(
+        match.packageId,
+        match.carrierId,
+        match.detourDistance || 0
+      );
+      
+      return {
+        ...match,
+        estimatedCarbonSavings: estimatedSavings
+      };
+    }));
+    
     res.status(200).json({
       success: true,
-      data: matches
+      data: matchesWithCarbon
     });
   } catch (error) {
-    console.error('Error getting package matches:', error);
+    logger.error('Error getting package matches:', error);
     res.status(500).json({
       success: false,
       message: 'Error retrieving package matches',
@@ -685,54 +743,6 @@ export const getPackageMatches = async (req: Request, res: Response) => {
     });
   }
 };
-
-/**
- * Verify package pickup with code
- * @route POST /api/v1/matches/:id/verify-pickup
- * @access Private (carrier)
- */
-// export const verifyPickup = async (req: Request, res: Response) => {
-//   try {
-//     const { id } = req.params;
-//     const carrierId = req.user?.id;
-//     const { pickupCode } = req.body;
-    
-//     if (!pickupCode) {
-//       return res.status(400).json({
-//         success: false,
-//         message: 'Pickup code is required'
-//       });
-//     }
-    
-// //  package status to in-transit
-// //     // This would typically be a separate model/controller
-// //     // But for this example, we'll assume a package status field exists
-// //     await updateDoc(doc(packagesRef, match.packageId), {
-// //       status: 'in_transit',
-// //       pickupTime: Timestamp.now()
-// //     });
-    
-// //     // We might also update the match but that depends on business logic
-// //     // For this example, we'll add a note
-// //     const notes = match.adminNotes 
-// //       ? `${match.adminNotes}\nPackage picked up at ${new Date().toISOString()}`
-// //       : `Package picked up at ${new Date().toISOString()}`;
-      
-// //     await updateMatchById(id, { adminNotes: notes });
-    
-//     res.status(200).json({
-//       success: true,
-//       message: 'Package pickup verified successfully'
-//     });
-//   } catch (error) {
-//     console.error('Error verifying pickup:', error);
-//     res.status(500).json({
-//       success: false,
-//       message: 'Error verifying pickup',
-//       error: (error as Error).message
-//     });
-//   }
-// };
 
 /**
  * Verify package delivery with code
@@ -744,6 +754,13 @@ export const verifyDelivery = async (req: Request, res: Response) => {
     const { id } = req.params;
     const carrierId = req.user?.id;
     const { deliveryCode } = req.body;
+    
+    if (!carrierId) {
+      return res.status(401).json({ 
+        success: false,
+        message: 'User not authenticated' 
+      });
+    }
     
     if (!deliveryCode) {
       return res.status(400).json({
@@ -788,25 +805,50 @@ export const verifyDelivery = async (req: Request, res: Response) => {
     }
     
     // Update package status to delivered
+    const deliveryTime = Timestamp.now();
     await updateDocument(PACKAGES_COLLECTION, match.packageId, {
       status: 'delivered',
-      deliveryTime: Timestamp.now()
+      deliveryTime
     });
     
     // Update match to completed
     await updateDocument(MATCHES_COLLECTION, id, {
       status: MatchStatus.COMPLETED,
+      completedAt: deliveryTime,
       adminNotes: match.adminNotes 
         ? `${match.adminNotes}\nPackage delivered at ${new Date().toISOString()}`
         : `Package delivered at ${new Date().toISOString()}`
     });
     
-    res.status(200).json({
-      success: true,
-      message: 'Package delivery verified and match completed successfully'
-    });
+    // Calculate carbon emissions for this delivery
+    try {
+      const emissionData = await CarbonEmissionService.processDeliveryEmissions(match.packageId);
+      
+      res.status(200).json({
+        success: true,
+        message: 'Package delivery verified and match completed successfully',
+        data: {
+          matchId: id,
+          packageId: match.packageId,
+          carbonEmissions: emissionData
+        }
+      });
+    } catch (emissionError) {
+      // Still return success for the delivery verification, but note the emission calculation error
+      logger.error('Error calculating carbon emissions:', emissionError);
+      
+      res.status(200).json({
+        success: true,
+        message: 'Package delivery verified and match completed successfully',
+        note: 'Carbon emission calculation failed',
+        data: {
+          matchId: id,
+          packageId: match.packageId
+        }
+      });
+    }
   } catch (error) {
-    console.error('Error verifying delivery:', error);
+    logger.error('Error verifying delivery:', error);
     res.status(500).json({
       success: false,
       message: 'Error verifying delivery',
@@ -824,124 +866,493 @@ export const autoMatch = async (req: Request, res: Response) => {
   try {
     const { limit = 10 } = req.body;
     
-    // Find packages that need matching
-    const packages = await queryDocuments(
-      PACKAGES_COLLECTION,
-      [
-        ['status', '==', 'ready_for_pickup'],
-        ['matched', '==', false]
-      ],
-      undefined,
-      parseInt(limit as string)
-    );
-    
-    if (packages.length === 0) {
-      return res.status(200).json({
-        success: true,
-        message: 'No packages found that need matching',
-        data: []
-      });
-    }
-    
-    // For each package, find suitable carriers
-    const matchPromises = packages.map(async (pkg) => {
-      // Find nearby carriers
-      // This is a simplified version - real implementation would use geoqueries
-      const carriers = await queryDocuments(
-        USERS_COLLECTION,
-        [
-          ['role', '==', 'carrier'],
-          ['active', '==', true]
-        ],
-        undefined,
-        3 // Find top 3 carriers per package
-      );
+    // Use AI Matching Service for auto-matching
+    try {
+      const results = await AIMatchingService.autoMatchPackages(parseInt(limit as string));
       
-      if (carriers.length === 0) {
-        return {
-          packageId: pkg.id,
-          matches: []
-        };
+      if (results.length === 0) {
+        return res.status(200).json({
+          success: true,
+          message: 'No packages found that need matching',
+          data: []
+        });
       }
       
-      // Create matches for each carrier
-      const matchPromises = carriers.map(async (carrier) => {
-        // Calculate score and other match attributes
-        // This is simplified - real implementation would use more factors
-        const score = Math.floor(Math.random() * 31) + 70; // 70-100
-        const detourDistance = Math.random() * 5; // 0-5 km
-        const detourTime = Math.floor(detourDistance * 3); // ~3 min per km
-        
-        // Set expiration time (4 hours from now)
-        const expirationDate = new Date();
-        expirationDate.setHours(expirationDate.getHours() + 4);
-        
-        // Calculate estimated times
-        const now = new Date();
-        const pickupTime = new Date(now.getTime() + 30 * 60000); // 30 mins from now
-        const deliveryTime = new Date(pickupTime.getTime() + (pkg.estimatedDuration || 60) * 60000);
-        
-        // Set payout amount (simplified)
-        const baseRate = 10; // $10 base
-        const distanceRate = 0.5; // $0.50 per km
-        const timeRate = 0.2; // $0.20 per minute
-        
-        const distance = pkg.distance || 5; // Default 5km if not specified
-        const carrierPayoutAmount = baseRate + (distance * distanceRate) + (detourTime * timeRate);
-        const platformFeeAmount = carrierPayoutAmount * 0.15; // 15% platform fee
-        
-        // Generate pickup and delivery codes
-        const carrierPickupCode = Math.floor(100000 + Math.random() * 900000).toString();
-        const carrierDeliveryCode = Math.floor(100000 + Math.random() * 900000).toString();
-        
-        // Create match
-        const matchData = {
-          packageId: pkg.id,
-          carrierId: carrier.id,
-          status: MatchStatus.PENDING,
-          score,
-          detourDistance,
-          detourTime,
-          estimatedPickupTime: Timestamp.fromDate(pickupTime),
-          estimatedDeliveryTime: Timestamp.fromDate(deliveryTime),
-          expiresAt: Timestamp.fromDate(expirationDate),
-          carrierPayoutAmount,
-          platformFeeAmount,
-          carrierPickupCode,
-          carrierDeliveryCode
-        };
-        
-        const matchId = await createDocument(MATCHES_COLLECTION, matchData);
-        return await getDocument(MATCHES_COLLECTION, matchId);
+      res.status(200).json({
+        success: true,
+        message: `Auto-matched ${results.length} packages using AI matching`,
+        data: results
       });
+    } catch (aiError) {
+      logger.error('AI auto-matching failed:', aiError);
       
-      const matches = await Promise.all(matchPromises);
+      // Fallback to original matching logic
+      // Find packages that need matching
+      const packages = await queryDocuments(
+        PACKAGES_COLLECTION,
+        [
+          ['status', '==', 'ready_for_pickup'],
+          ['matched', '==', false]
+        ],
+        undefined,
+        parseInt(limit as string)
+      );
       
-      // Mark package as matched
-      await updateDocument(PACKAGES_COLLECTION, pkg.id, {
-        matched: true,
-        matchedAt: Timestamp.now()
+      if (packages.length === 0) {
+        return res.status(200).json({
+          success: true,
+          message: 'No packages found that need matching',
+          data: []
+        });
+      }
+      
+      // For each package, find suitable carriers
+      const matchPromises = packages.map(async (pkg) => {
+        // Find nearby carriers
+        const carriers = await queryDocuments(
+          USERS_COLLECTION,
+          [
+            ['role', '==', 'carrier'],
+            ['active', '==', true]
+          ],
+          undefined,
+          3 // Find top 3 carriers per package
+        );
+        
+        if (carriers.length === 0) {
+          return {
+            packageId: pkg.id,
+            matches: []
+          };
+        }
+        
+        // Create matches for each carrier
+        const matchPromises = carriers.map(async (carrier) => {
+          // Calculate score and other match attributes
+          const score = Math.floor(Math.random() * 31) + 70; // 70-100
+          const detourDistance = Math.random() * 5; // 0-5 km
+          const detourTime = Math.floor(detourDistance * 3); // ~3 min per km
+          
+          // Set expiration time (4 hours from now)
+          const expirationDate = new Date();
+          expirationDate.setHours(expirationDate.getHours() + 4);
+          
+          // Calculate estimated times
+          const now = new Date();
+          const pickupTime = new Date(now.getTime() + 30 * 60000); // 30 mins from now
+          const deliveryTime = new Date(pickupTime.getTime() + (pkg.estimatedDuration || 60) * 60000);
+          
+          // Set payout amount (simplified)
+          const baseRate = 10; // $10 base
+          const distanceRate = 0.5; // $0.50 per km
+          const timeRate = 0.2; // $0.20 per minute
+          
+          const distance = pkg.distance || 5; // Default 5km if not specified
+          const carrierPayoutAmount = baseRate + (distance * distanceRate) + (detourTime * timeRate);
+          const platformFeeAmount = carrierPayoutAmount * 0.15; // 15% platform fee
+          
+          // Generate pickup and delivery codes
+          const carrierPickupCode = Math.floor(100000 + Math.random() * 900000).toString();
+          const carrierDeliveryCode = Math.floor(100000 + Math.random() * 900000).toString();
+          
+          // Create match
+          const matchData:any = {
+              packageId: pkg.id,
+              carrierId: carrier.id,
+              status: MatchStatus.PENDING,
+              score,
+              detourDistance,
+              detourTime,
+              estimatedPickupTime: Timestamp.fromDate(pickupTime),
+              estimatedDeliveryTime: Timestamp.fromDate(deliveryTime),
+              expiresAt: Timestamp.fromDate(expirationDate),
+              carrierPayoutAmount,
+              platformFeeAmount,
+              carrierPickupCode,
+              carrierDeliveryCode
+            };
+            
+            const matchId = await createDocument(MATCHES_COLLECTION, matchData);
+            return await getDocument(MATCHES_COLLECTION, matchId);
+          });
+          
+          const matches = await Promise.all(matchPromises);
+          
+          // Mark package as matched
+          await updateDocument(PACKAGES_COLLECTION, pkg.id, {
+            matched: true,
+            matchedAt: Timestamp.now()
+          });
+          
+          return {
+            packageId: pkg.id,
+            matches
+          };
+        });
+        
+        const results = await Promise.all(matchPromises);
+        
+        res.status(200).json({
+          success: true,
+          message: `Auto-matched ${results.length} packages using fallback method`,
+          note: "AI matching failed, using simpler algorithm",
+          data: results
+        });
+      }
+    } catch (error) {
+      logger.error('Error auto-matching:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error during auto-matching process',
+        error: (error as Error).message
       });
+    }
+  };
+  
+  /**
+   * Provide feedback on completed delivery (includes carbon impact)
+   * @route POST /api/v1/matches/:id/feedback
+   * @access Private (sender)
+   */
+  export const provideDeliveryFeedback = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const userId = req.user?.id;
+      const userRole = req.user?.role;
+      const { rating, comment, environmentalImpactAwareness } = req.body;
       
-      return {
-        packageId: pkg.id,
-        matches
+      if (!userId || !userRole) {
+        return res.status(401).json({ 
+          success: false,
+          message: 'User not authenticated or role not defined' 
+        });
+      }
+      
+      // Only senders can provide feedback
+      if (userRole !== 'sender' && userRole !== 'admin') {
+        return res.status(403).json({
+          success: false,
+          message: 'Only senders can provide delivery feedback'
+        });
+      }
+      
+      // Get the match
+      const match = await getDocument(MATCHES_COLLECTION, id);
+      
+      if (!match) {
+        return res.status(404).json({
+          success: false,
+          message: 'Match not found'
+        });
+      }
+      
+      // Verify package ownership for senders
+      if (userRole === 'sender') {
+        const packageDoc = await getDocument(PACKAGES_COLLECTION, match.packageId);
+        if (!packageDoc || packageDoc.senderId !== userId) {
+          return res.status(403).json({
+            success: false,
+            message: 'Unauthorized to provide feedback for this delivery'
+          });
+        }
+      }
+      
+      // Check if match is completed
+      if (match.status !== MatchStatus.COMPLETED) {
+        return res.status(400).json({
+          success: false,
+          message: 'Feedback can only be provided for completed deliveries'
+        });
+      }
+      
+      // Check if feedback already exists
+      if (match.feedback) {
+        return res.status(400).json({
+          success: false,
+          message: 'Feedback has already been provided for this delivery'
+        });
+      }
+      
+      // Validate rating
+      const numericRating = parseFloat(rating);
+      if (isNaN(numericRating) || numericRating < 1 || numericRating > 5) {
+        return res.status(400).json({
+          success: false,
+          message: 'Rating must be a number between 1 and 5'
+        });
+      }
+      
+      // Get carbon emission data for the delivery
+      let carbonData = null;
+      try {
+        carbonData = await CarbonEmissionService.getDeliveryEmissions(match.packageId);
+      } catch (carbonError) {
+        logger.warn('Could not retrieve carbon data for delivery feedback:', carbonError);
+        // Continue without carbon data
+      }
+      
+      // Save feedback
+      const feedbackData = {
+        rating: numericRating,
+        comment: comment || '',
+        environmentalImpactAwareness: environmentalImpactAwareness || 0,
+        carbonData: carbonData,
+        providedBy: userId,
+        providedAt: Timestamp.now()
       };
-    });
-    
-    const results = await Promise.all(matchPromises);
-    
-    res.status(200).json({
-      success: true,
-      message: `Auto-matched ${results.length} packages`,
-      data: results
-    });
-  } catch (error) {
-    console.error('Error auto-matching:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error during auto-matching process',
-      error: (error as Error).message
-    });
+      
+      await updateDocument(MATCHES_COLLECTION, id, {
+        feedback: feedbackData,
+        updatedAt: Timestamp.now()
+      });
+      
+      // If rating is good (4+), use as positive feedback for AI model
+      if (numericRating >= 4) {
+        await AIMatchingService.updateModelWithFeedback(
+          id, 
+          true, 
+          `Positive delivery feedback: ${numericRating}/5`
+        );
+      }
+      
+      // Update carrier's average rating
+      await updateCarrierRating(match.carrierId);
+      
+      // Get updated match
+      const updatedMatch = await getDocument(MATCHES_COLLECTION, id);
+      
+      res.status(200).json({
+        success: true,
+        message: 'Feedback provided successfully',
+        data: updatedMatch
+      });
+    } catch (error) {
+      logger.error('Error providing delivery feedback:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error providing delivery feedback',
+        error: (error as Error).message
+      });
+    }
+  };
+  
+  /**
+   * Helper function to update a carrier's average rating
+   */
+  async function updateCarrierRating(carrierId: string): Promise<void> {
+    try {
+      // Get all completed matches for this carrier with feedback
+      const matchesWithFeedback = await queryDocuments(MATCHES_COLLECTION, [
+        ['carrierId', '==', carrierId],
+        ['status', '==', MatchStatus.COMPLETED]
+      ]);
+      
+      // Filter matches that have feedback
+      const feedbacks = matchesWithFeedback
+        .filter(match => match.feedback && match.feedback.rating)
+        .map(match => match.feedback.rating);
+      
+      if (feedbacks.length === 0) {
+        return; // No feedback yet
+      }
+      
+      // Calculate average rating
+      const totalRating = feedbacks.reduce((sum, rating) => sum + rating, 0);
+      const averageRating = parseFloat((totalRating / feedbacks.length).toFixed(1));
+      
+      // Update carrier's rating
+      await updateDocument(USERS_COLLECTION, carrierId, {
+        rating: averageRating,
+        totalRatings: feedbacks.length,
+        updatedAt: Timestamp.now()
+      });
+    } catch (error) {
+      logger.error(`Error updating carrier rating for ${carrierId}:`, error);
+      // Don't throw error to avoid disrupting the main flow
+    }
   }
-};
+  
+  /**
+   * Get carbon footprint for a specific match
+   * @route GET /api/v1/matches/:id/carbon-impact
+   * @access Private
+   */
+  export const getMatchCarbonFootprint = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const userId = req.user?.id;
+      const userRole = req.user?.role;
+      
+      if (!userId || !userRole) {
+        return res.status(401).json({ 
+          success: false,
+          message: 'User not authenticated or role not defined' 
+        });
+      }
+      
+      // Get the match
+      const match = await getDocument(MATCHES_COLLECTION, id);
+      
+      if (!match) {
+        return res.status(404).json({
+          success: false,
+          message: 'Match not found'
+        });
+      }
+      
+      // Check authorization
+      if (userRole !== 'admin') {
+        if (userRole === 'carrier' && match.carrierId !== userId) {
+          return res.status(403).json({
+            success: false,
+            message: 'Unauthorized to access this match'
+          });
+        }
+        
+        if (userRole === 'sender') {
+          // Check if package belongs to sender
+          const packageDoc = await getDocument(PACKAGES_COLLECTION, match.packageId);
+          if (!packageDoc || packageDoc.senderId !== userId) {
+            return res.status(403).json({
+              success: false,
+              message: 'Unauthorized to access this match'
+            });
+          }
+        }
+      }
+      
+      // Get carbon emissions data
+      try {
+        const carbonData = await CarbonEmissionService.getDeliveryEmissions(match.packageId);
+        
+        // Calculate environmental impact equivalents
+        const treesPlantedEquivalent = carbonData!.emissionSavings / 20000; // Approx. CO2 absorbed by a tree per year (20kg)
+        const carMilesEquivalent = carbonData!.emissionSavings / 250; // g CO2 per km for avg car, converted to miles
+        
+        res.status(200).json({
+          success: true,
+          data: {
+            matchId: id,
+            packageId: match.packageId,
+            carrierId: match.carrierId,
+            carbonEmissions: carbonData,
+            environmentalEquivalents: {
+              treesPlantedEquivalent: treesPlantedEquivalent.toFixed(2),
+              carMilesEquivalent: carMilesEquivalent.toFixed(2)
+            }
+          }
+        });
+      } catch (error) {
+        // Handle case where emissions haven't been calculated yet
+        // This can happen if the match is not completed or if processDeliveryEmissions hasn't been called
+        
+        if (match.status !== MatchStatus.COMPLETED) {
+          // For incomplete matches, provide an estimate based on route data
+          const estimatedSavings = await CarbonEmissionService.estimateEmissionSavings(
+            match.packageId,
+            match.carrierId,
+            match.detourDistance || 0
+          );
+          
+          res.status(200).json({
+            success: true,
+            data: {
+              matchId: id,
+              packageId: match.packageId,
+              carrierId: match.carrierId,
+              estimatedCarbonSavings: estimatedSavings,
+              note: 'Delivery not completed yet. These are estimated values.'
+            }
+          });
+        } else {
+          // For completed matches that don't have emission data (rare case)
+          res.status(404).json({
+            success: false,
+            message: 'Carbon emission data not found for this delivery'
+          });
+        }
+      }
+    } catch (error) {
+      logger.error('Error getting match carbon footprint:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error retrieving carbon footprint data',
+        error: (error as Error).message
+      });
+    }
+  };
+  
+  /**
+   * Get carrier environmental impact statistics
+   * @route GET /api/v1/matches/carrier/:carrierId/environmental-impact
+   * @access Private
+   */
+  export const getCarrierEnvironmentalImpact = async (req: Request, res: Response) => {
+    try {
+      const { carrierId } = req.params;
+      const userId = req.user?.id;
+      const userRole = req.user?.role;
+      
+      if (!userId || !userRole) {
+        return res.status(401).json({ 
+          success: false,
+          message: 'User not authenticated or role not defined' 
+        });
+      }
+      
+      // Check authorization - carriers can only see their own stats
+      if (userRole === 'carrier' && carrierId !== userId) {
+        return res.status(403).json({
+          success: false,
+          message: 'Unauthorized to access this carrier\'s environmental impact'
+        });
+      }
+      
+      // Get carrier data to verify existence
+      const carrierDoc = await getDocument(USERS_COLLECTION, carrierId);
+      if (!carrierDoc) {
+        return res.status(404).json({
+          success: false,
+          message: 'Carrier not found'
+        });
+      }
+      
+      // Retrieve carbon emission stats for this carrier
+      try {
+        const environmentalImpact = await CarbonEmissionService.getCarrierEmissionStats(carrierId);
+        
+        // Retrieve badges if available
+        let badges = [];
+        try {
+          const badgesData = await CarbonEmissionService.generateCarrierEmissionBadges(carrierId);
+          badges = badgesData?.earnedBadges || [];
+        } catch (badgeError) {
+          logger.warn('Error generating carrier badges:', badgeError);
+          // Continue without badges
+        }
+        
+        res.status(200).json({
+          success: true,
+          data: {
+            carrierId,
+            carrierName: carrierDoc.name,
+            environmentalImpact,
+            badges
+          }
+        });
+      } catch (error) {
+        logger.error('Error retrieving carrier environmental impact:', error);
+        res.status(404).json({
+          success: false,
+          message: 'No environmental impact data found for this carrier'
+        });
+      }
+    } catch (error) {
+      logger.error('Error getting carrier environmental impact:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error retrieving carrier environmental impact data',
+        error: (error as Error).message
+      });
+    }
+  };

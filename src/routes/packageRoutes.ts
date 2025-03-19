@@ -9,7 +9,7 @@ const router: Router = express.Router();
  * @desc    Create a new package
  * @access  Private (sender)
  */
-router.post('/', authenticate, authorize(['sender', 'admin']), packageController.createPackage);
+router.post('/', authorize(['sender', 'admin']), packageController.createPackage);
 
 /**
  * @route   GET /api/v1/packages

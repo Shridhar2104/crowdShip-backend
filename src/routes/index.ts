@@ -6,6 +6,7 @@ import matchingRoutes from './matchingRoutes';
 // import paymentRoutes from './paymentRoutes';
 import notificationRoutes from './notificationRoutes';
 import ratingRoutes from './ratingRoutes';
+import carbonRoutes from './carbonRoutes';
 
 const router: Router = express.Router();
 
@@ -17,5 +18,6 @@ router.use('/matches', matchingRoutes);
 // router.use('/payments', paymentRoutes);
 router.use('/notifications', notificationRoutes);
 router.use('/ratings', ratingRoutes);
+router.use('/carbon', carbonRoutes);
 
 export default router;

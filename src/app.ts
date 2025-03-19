@@ -16,6 +16,7 @@ import matchingRoutes from './routes/matchingRoutes';
 // import paymentRoutes from './routes/paymentRoutes';
 import notificationRoutes from './routes/notificationRoutes';
 import ratingRoutes from './routes/ratingRoutes';
+import carbonRoutes from './routes/carbonRoutes';
 
 const app: Express = express();
 
@@ -65,6 +66,7 @@ app.use(`/api/${apiVersion}/matches`, matchingRoutes);
 app.use(`/api/${apiVersion}/notifications`, notificationRoutes);
 app.use(`/api/${apiVersion}/ratings`, ratingRoutes);
 // app.use(`/api/${apiVersion}/payments`, paymentRoutes);
+app.use(`/api/${apiVersion}/carbon`, carbonRoutes); 
 
 
 // Error handling middleware

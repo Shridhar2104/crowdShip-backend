@@ -4,9 +4,6 @@ import * as matchingController from '../controllers/matchingController';
 
 const router: Router = express.Router();
 
-
-//package id----e52a4e8e-5a30-4bea-98b2-6885b660900a
-//carrier id----1ae50c83-729b-4353-9e41-d44ff3c11bf6
 // Wrapper function to handle async route handlers
 const asyncHandler = (fn: (req: Request, res: Response, next: NextFunction) => Promise<void>) => 
   (req: Request, res: Response, next: NextFunction) => {
@@ -51,7 +48,7 @@ router.get('/:id', authenticate, asyncHandler(async (req: Request, res: Response
 
 /**
  * @route   POST /api/v1/matches/find-carriers
- * @desc    Find carriers for a package
+ * @desc    Find carriers for a package using AI matching
  * @access  Private (sender or admin)
  */
 router.post('/find-carriers', authenticate, authorize(['sender', 'admin']), asyncHandler(async (req: Request, res: Response) => {
@@ -95,15 +92,6 @@ router.get('/package/:packageId', authenticate, asyncHandler(async (req: Request
 }));
 
 /**
- * @route   POST /api/v1/matches/:id/verify-pickup
- * @desc    Verify package pickup with code
- * @access  Private (carrier)
- */
-// router.post('/:id/verify-pickup', authenticate, authorize(['carrier']), asyncHandler(async (req: Request, res: Response) => {
-//   await matchingController.verifyPickup(req, res);
-// }));
-
-/**
  * @route   POST /api/v1/matches/:id/verify-delivery
  * @desc    Verify package delivery with code
  * @access  Private (carrier)
@@ -119,6 +107,33 @@ router.post('/:id/verify-delivery', authenticate, authorize(['carrier']), asyncH
  */
 router.post('/auto-match', authenticate, authorize(['admin']), asyncHandler(async (req: Request, res: Response) => {
   await matchingController.autoMatch(req, res);
+}));
+
+/**
+ * @route   POST /api/v1/matches/:id/feedback
+ * @desc    Provide feedback on completed delivery (includes carbon impact)
+ * @access  Private (sender)
+ */
+router.post('/:id/feedback', authenticate, authorize(['sender', 'admin']), asyncHandler(async (req: Request, res: Response) => {
+  await matchingController.provideDeliveryFeedback(req, res);
+}));
+
+/**
+ * @route   GET /api/v1/matches/:id/carbon-impact
+ * @desc    Get carbon footprint for a specific match
+ * @access  Private
+ */
+router.get('/:id/carbon-impact', authenticate, asyncHandler(async (req: Request, res: Response) => {
+  await matchingController.getMatchCarbonFootprint(req, res);
+}));
+
+/**
+ * @route   GET /api/v1/matches/carrier/:carrierId/environmental-impact
+ * @desc    Get carrier environmental impact statistics
+ * @access  Private
+ */
+router.get('/carrier/:carrierId/environmental-impact', authenticate, asyncHandler(async (req: Request, res: Response) => {
+  await matchingController.getCarrierEnvironmentalImpact(req, res);
 }));
 
 export default router;
