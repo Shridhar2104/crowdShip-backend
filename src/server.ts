@@ -1,40 +1,21 @@
-import http from 'http';
-import { Server as SocketIOServer } from 'socket.io';
 import app from './app';
 import { config } from './config';
 import { logger } from './utils/logger';
 import { connectDatabase } from './config/database';
-import { initializeSocketIO } from './config/socket';
-import { initializeRedis } from './config/redis';
-
-
-// Create HTTP server
-const server = http.createServer(app);
 
 // Set port
 const port = config.port || 5000;
 
-// Create Socket.IO server
-const io = new SocketIOServer(server, {
-  cors: {
-    origin: config.corsOrigin,
-    methods: ['GET', 'POST'],
-    credentials: true,
-  },
+// Connect to database when the app starts
+connectDatabase().catch((error) => {
+  logger.error('Failed to connect to database:', error);
 });
-
-// Initialize Socket.IO
-initializeSocketIO(io);
 
 // Start server
 const startServer = async () => {
   try {
-    // Connect to databases
-    await connectDatabase();
-    // await initializeRedis();
-
     // Start listening
-    server.listen(port, () => {
+    app.listen(port, () => {
       logger.info(`Server running in ${config.nodeEnv} mode on port ${port}`);
       logger.info(`API is available at http://localhost:${port}/api/${config.apiVersion}`);
     });
@@ -68,3 +49,6 @@ const startServer = async () => {
 
 // Start the server
 startServer();
+
+// Export the Express app for Vercel
+export default app;
