@@ -51,7 +51,7 @@ router.get('/:id', authenticate, asyncHandler(async (req: Request, res: Response
  * @desc    Find carriers for a package using AI matching
  * @access  Private (sender or admin)
  */
-router.post('/find-carriers', authenticate, authorize(['sender', 'admin']), asyncHandler(async (req: Request, res: Response) => {
+router.post('/find-carriers', authorize(['sender', 'admin']), asyncHandler(async (req: Request, res: Response) => {
   await matchingController.findCarriers(req, res);
 }));
 

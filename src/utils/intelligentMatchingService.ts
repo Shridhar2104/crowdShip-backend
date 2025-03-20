@@ -4,9 +4,8 @@ import { logger } from './logger';
 import path from 'path';
 import fs from 'fs';
 
-
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
-
+// Remove this import as it's using the client-side modular API
+// import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
 interface MatchScore {
   carrierId: string;
@@ -47,21 +46,21 @@ interface CarrierDocument {
 
 // Fetch carriers from Firestore
 const fetchCarriers = async (): Promise<CarrierDocument[]> => {
-  const carriersCollection = collection(db,'carriers'); // Replace 'carriers' with your collection name
-  const carriersSnapshot = await getDocs(carriersCollection);
+  // Use the Admin SDK pattern since we're importing db from '../config/database'
+  const carriersSnapshot = await db.collection('carriers').get();
 
-// Then in your findOptimalCarriers method:
-const carriersData: CarrierDocument[] = carriersSnapshot.docs.map((doc: { data: () => any; id: any; }) => {
-  const data = doc.data();
-  return {
-    id: doc.id,
-    ...data
-  } as CarrierDocument;
-});
+  // Then in your findOptimalCarriers method:
+  const carriersData: CarrierDocument[] = carriersSnapshot.docs.map((doc) => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      ...data
+    } as CarrierDocument;
+  });
 
-
-return carriersData;
+  return carriersData;
 };
+
 interface PackageDimensions {
   length: number;
   width: number;
@@ -503,35 +502,33 @@ if __name__ == "__main__":
           id: doc.id,
           ...data
         } as CarrierDocument;
-
       });
       
       // Find carriers within radius of pickup
-// Find carriers within radius of pickup
-const nearbyCarriers = carriersData.filter(carrier => {
-  // Make sure lastLocation exists before accessing its properties
-  if (!carrier.lastLocation || !carrier.lastLocation.latitude || !carrier.lastLocation.longitude) {
-    return false;
-  }
-  
-  const carrierLat = carrier.lastLocation.latitude;
-  const carrierLng = carrier.lastLocation.longitude;
-  const pickupLat = packageData.pickupLocation.latitude;
-  const pickupLng = packageData.pickupLocation.longitude;
-  
-  // Simple distance calculation (Haversine formula)
-  const R = 6371; // Earth radius in km
-  const dLat = this.deg2rad(pickupLat - carrierLat);
-  const dLon = this.deg2rad(pickupLng - carrierLng);
-  const a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(this.deg2rad(carrierLat)) * Math.cos(this.deg2rad(pickupLat)) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2); 
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-  const distance = R * c;
-  
-  return distance <= radius;
-});
+      const nearbyCarriers = carriersData.filter(carrier => {
+        // Make sure lastLocation exists before accessing its properties
+        if (!carrier.lastLocation || !carrier.lastLocation.latitude || !carrier.lastLocation.longitude) {
+          return false;
+        }
+        
+        const carrierLat = carrier.lastLocation.latitude;
+        const carrierLng = carrier.lastLocation.longitude;
+        const pickupLat = packageData.pickupLocation.latitude;
+        const pickupLng = packageData.pickupLocation.longitude;
+        
+        // Simple distance calculation (Haversine formula)
+        const R = 6371; // Earth radius in km
+        const dLat = this.deg2rad(pickupLat - carrierLat);
+        const dLon = this.deg2rad(pickupLng - carrierLng);
+        const a = 
+          Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(this.deg2rad(carrierLat)) * Math.cos(this.deg2rad(pickupLat)) * 
+          Math.sin(dLon/2) * Math.sin(dLon/2); 
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        const distance = R * c;
+        
+        return distance <= radius;
+      });
       
       if (nearbyCarriers.length === 0) {
         return [];
@@ -891,9 +888,8 @@ const nearbyCarriers = carriersData.filter(carrier => {
             id: matchDoc.id,
             ...matchDoc.data()
           };
-        });
-        
-        const matches = await Promise.all(matchPromises);
+        }, 10);
+          const matches = await Promise.all(matchPromises);
         
         // Mark package as matched
         await db.collection(this.PACKAGES_COLLECTION).doc(packageId).update({

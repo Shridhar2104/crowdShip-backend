@@ -8,6 +8,7 @@ import { logger } from '../utils/logger';
 import { config } from '../config';
 import { db,Timestamp } from '../config/database';
 
+
 /**
  * Register a new user
  * @route POST /api/v1/users/register
