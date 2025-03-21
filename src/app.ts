@@ -11,11 +11,10 @@ import { logger } from './utils/logger';
 // Import routes
 import userRoutes from './routes/userRoutes';
 import packageRoutes from './routes/packageRoutes';
-import routeRoutes from './routes/routeRoutes';
 import matchingRoutes from './routes/matchingRoutes';
 // import paymentRoutes from './routes/paymentRoutes';
-import notificationRoutes from './routes/notificationRoutes';
-import ratingRoutes from './routes/ratingRoutes';
+// import notificationRoutes from './routes/notificationRoutes';
+//import ratingRoutes from './routes/ratingRoutes';
 import carbonRoutes from './routes/carbonRoutes';
 
 const app: Express = express();
@@ -61,10 +60,10 @@ app.get('/health', (req: Request, res: Response) => {
 const apiVersion = config.apiVersion;
 app.use(`/api/${apiVersion}/users`, userRoutes);
 app.use(`/api/${apiVersion}/packages`, packageRoutes);
- app.use(`/api/${apiVersion}/routes`, routeRoutes);
+ //app.use(`/api/${apiVersion}/routes`, routeRoutes);
 app.use(`/api/${apiVersion}/matches`, matchingRoutes);
-app.use(`/api/${apiVersion}/notifications`, notificationRoutes);
-app.use(`/api/${apiVersion}/ratings`, ratingRoutes);
+//app.use(`/api/${apiVersion}/notifications`, notificationRoutes);
+//app.use(`/api/${apiVersion}/ratings`, ratingRoutes);
 // app.use(`/api/${apiVersion}/payments`, paymentRoutes);
 app.use(`/api/${apiVersion}/carbon`, carbonRoutes); 
 
