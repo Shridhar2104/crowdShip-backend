@@ -14,7 +14,7 @@ const router: Router = express.Router();
 router.use('/users', userRoutes);
 router.use('/packages', packageRoutes);
 router.use('/routes', routeRoutes);
-router.use('/matches', matchingRoutes);
+//router.use('/matches', matchingRoutes);
 // router.use('/payments', paymentRoutes);
 router.use('/notifications', notificationRoutes);
 router.use('/ratings', ratingRoutes);
