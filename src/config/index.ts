@@ -21,6 +21,16 @@ export const config = {
     dialect: 'postgres',
   },
   
+  // MongoDB configuration
+  mongodb: {
+    uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/ml_matching',
+    options: {
+      autoIndex: true,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    }
+  },
+  
   // Redis configuration
   redis: {
     host: process.env.REDIS_HOST || 'localhost',
@@ -32,8 +42,8 @@ export const config = {
   jwt: {
     accessSecret: process.env.JWT_ACCESS_SECRET || 'access_secret',
     refreshSecret: process.env.JWT_REFRESH_SECRET || 'refresh_secret',
-    accessExpiresIn:15*60*60, // 15 minutes
-    refreshExpiresIn:24*7*60*60, // 7 days
+    accessExpiresIn: 15*60*60, // 15 minutes
+    refreshExpiresIn: 24*7*60*60, // 7 days
   },
   
   // Google Maps API
@@ -78,4 +88,9 @@ export const config = {
     window: process.env.RATE_LIMIT_WINDOW || '15m',
     max: parseInt(process.env.RATE_LIMIT_MAX || '100', 10),
   },
+  
+  // Firebase configuration
+  firebase: {
+    serviceAccountBase64: process.env.FIREBASE_SERVICE_ACCOUNT_BASE64 || '',
+  }
 };
