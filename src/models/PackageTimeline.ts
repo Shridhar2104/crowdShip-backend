@@ -92,7 +92,7 @@ export class PackageTimeline implements PackageTimelineAttributes {
       updatedAt: new Date()
     });
 
-    // Save to Firestore
+    // Save to Firestore using direct db call to ensure consistent behavior
     await db.collection(PackageTimeline.collectionName).doc(timeline.id).set({
       ...timeline.toFirestore(),
       createdAt: FieldValue.serverTimestamp(),
@@ -104,46 +104,66 @@ export class PackageTimeline implements PackageTimelineAttributes {
 
   // Find timeline entries by package ID
   public static async findByPackageId(packageId: string): Promise<PackageTimeline[]> {
-    const results = await queryDocuments(
-      PackageTimeline.collectionName, 
-      [['packageId', '==', packageId]],
-      { field: 'createdAt', direction: 'asc' }
-    );
-    
-    return results.map(doc => PackageTimeline.fromFirestore(doc));
+    try {
+      const results = await queryDocuments(
+        PackageTimeline.collectionName, 
+        [['packageId', '==', packageId]],
+        { field: 'createdAt', direction: 'asc' }
+      );
+      
+      return results.map(doc => PackageTimeline.fromFirestore(doc));
+    } catch (error) {
+      console.error('Error finding timeline entries by package ID:', error);
+      return [];
+    }
   }
 
   // Find timeline entries by user ID
   public static async findByUserId(userId: string): Promise<PackageTimeline[]> {
-    const results = await queryDocuments(
-      PackageTimeline.collectionName, 
-      [['userId', '==', userId]],
-      { field: 'createdAt', direction: 'desc' }
-    );
-    
-    return results.map(doc => PackageTimeline.fromFirestore(doc));
+    try {
+      const results = await queryDocuments(
+        PackageTimeline.collectionName, 
+        [['userId', '==', userId]],
+        { field: 'createdAt', direction: 'desc' }
+      );
+      
+      return results.map(doc => PackageTimeline.fromFirestore(doc));
+    } catch (error) {
+      console.error('Error finding timeline entries by user ID:', error);
+      return [];
+    }
   }
 
   // Find timeline entries by status
   public static async findByStatus(status: PackageStatus): Promise<PackageTimeline[]> {
-    const results = await queryDocuments(
-      PackageTimeline.collectionName, 
-      [['status', '==', status]],
-      { field: 'createdAt', direction: 'desc' }
-    );
-    
-    return results.map(doc => PackageTimeline.fromFirestore(doc));
+    try {
+      const results = await queryDocuments(
+        PackageTimeline.collectionName, 
+        [['status', '==', status]],
+        { field: 'createdAt', direction: 'desc' }
+      );
+      
+      return results.map(doc => PackageTimeline.fromFirestore(doc));
+    } catch (error) {
+      console.error('Error finding timeline entries by status:', error);
+      return [];
+    }
   }
 
   // Find timeline entries by location
   public static async findByLocation(location: string): Promise<PackageTimeline[]> {
-    const results = await queryDocuments(
-      PackageTimeline.collectionName, 
-      [['location', '==', location]],
-      { field: 'createdAt', direction: 'desc' }
-    );
-    
-    return results.map(doc => PackageTimeline.fromFirestore(doc));
+    try {
+      const results = await queryDocuments(
+        PackageTimeline.collectionName, 
+        [['location', '==', location]],
+        { field: 'createdAt', direction: 'desc' }
+      );
+      
+      return results.map(doc => PackageTimeline.fromFirestore(doc));
+    } catch (error) {
+      console.error('Error finding timeline entries by location:', error);
+      return [];
+    }
   }
 
   // Delete a timeline entry (rarely needed, but included for completeness)

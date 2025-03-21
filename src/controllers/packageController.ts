@@ -6,10 +6,10 @@ import {
   NotificationChannel, 
   NotificationPriority 
 } from '../models/notificationModel';
-import { 
-  sendNotification, 
-  addNotification 
-} from '../models/notificationService';
+// import { 
+//   sendNotification, 
+//   addNotification 
+// } from '../models/notificationService';
 
 import PackageTimeline from '../models/PackageTimeline';
 import PackageIssue from '../models/Packages';
@@ -182,21 +182,21 @@ export const createPackage = async (req: Request, res: Response, next: NextFunct
       return; // or handle appropriately
     }
     
-    // Create notification for the sender using new Firestore service
-    await sendNotification(
-      senderId,
-      NotificationType.PACKAGE_CREATED,
-      {
-        title: 'Package Created',
-        message: `Your package ${newPackage.title} has been created with tracking code ${trackingCode}`,
-        data: {
-          packageId: newPackage.id,
-          trackingCode
-        },
-        packageId: newPackage.id,
-        priority: NotificationPriority.LOW
-      }
-    );
+    // // Create notification for the sender using new Firestore service
+    // await sendNotification(
+    //   senderId,
+    //   NotificationType.PACKAGE_CREATED,
+    //   {
+    //     title: 'Package Created',
+    //     message: `Your package ${newPackage.title} has been created with tracking code ${trackingCode}`,
+    //     data: {
+    //       packageId: newPackage.id,
+    //       trackingCode
+    //     },
+    //     packageId: newPackage.id,
+    //     priority: NotificationPriority.LOW
+    //   }
+    // );
 
     // Send email notification to sender
     const user = await User.findById(senderId);
@@ -657,17 +657,17 @@ export const updatePackage = async (req: Request, res: Response, next: NextFunct
     });
     
     // Create notification for the sender using new Firestore service
-    await sendNotification(
-      packageItem.senderId,
-      NotificationType.PACKAGE_UPDATED,
-      {
-        title: 'Package Updated',
-        message: `Your package ${packageItem.title} has been updated`,
-        data: { packageId: packageItem.id },
-        packageId: packageItem.id,
-        priority: NotificationPriority.LOW
-      }
-    );
+    // await sendNotification(
+    //   packageItem.senderId,
+    //   NotificationType.PACKAGE_UPDATED,
+    //   {
+    //     title: 'Package Updated',
+    //     message: `Your package ${packageItem.title} has been updated`,
+    //     data: { packageId: packageItem.id },
+    //     packageId: packageItem.id,
+    //     priority: NotificationPriority.LOW
+    //   }
+    // );
     
     res.status(200).json({
       success: true,
@@ -720,42 +720,42 @@ export const cancelPackage = async (req: Request, res: Response, next: NextFunct
       userId: userId!
     });
     
-    // Create notification for the sender using new Firestore service
-    await sendNotification(
-      packageItem.senderId,
-      NotificationType.PACKAGE_CANCELLED,
-      {
-        title: 'Package Cancelled',
-        message: `Your package ${packageItem.title} has been cancelled`,
-        data: { packageId: packageItem.id },
-        packageId: packageItem.id,
-        priority: NotificationPriority.HIGH
-      }
-    );
+    // // Create notification for the sender using new Firestore service
+    // await sendNotification(
+    //   packageItem.senderId,
+    //   NotificationType.PACKAGE_CANCELLED,
+    //   {
+    //     title: 'Package Cancelled',
+    //     message: `Your package ${packageItem.title} has been cancelled`,
+    //     data: { packageId: packageItem.id },
+    //     packageId: packageItem.id,
+    //     priority: NotificationPriority.HIGH
+    //   }
+    // );
     
-    // If there was a carrier assigned, notify them as well
-    if (carrierId) {
-      await sendNotification(
-        carrierId,
-        NotificationType.PACKAGE_CANCELLED,
-        {
-          title: 'Package Cancelled',
-          message: `Package ${packageItem.title} has been cancelled by the sender`,
-          data: { packageId: packageItem.id },
-          packageId: packageItem.id,
-          priority: NotificationPriority.HIGH
-        }
-      );
+    // // If there was a carrier assigned, notify them as well
+    // if (carrierId) {
+    //   await sendNotification(
+    //     carrierId,
+    //     NotificationType.PACKAGE_CANCELLED,
+    //     {
+    //       title: 'Package Cancelled',
+    //       message: `Package ${packageItem.title} has been cancelled by the sender`,
+    //       data: { packageId: packageItem.id },
+    //       packageId: packageItem.id,
+    //       priority: NotificationPriority.HIGH
+    //     }
+    //   );
       
-      // You might want to send an SMS or push notification to the carrier
-      // This is critical as they might be en route
-    }
+    //   // You might want to send an SMS or push notification to the carrier
+    //   // This is critical as they might be en route
+    // }
     
-    res.status(200).json({
-      success: true,
-      message: 'Package cancelled successfully',
-      data: packageItem
-    });
+    // res.status(200).json({
+    //   success: true,
+    //   message: 'Package cancelled successfully',
+    //   data: packageItem
+    // });
   } catch (error) {
     logger.error(`Error cancelling package ${req.params.id}:`, error);
     next(new InternalServerError('Failed to cancel package'));
@@ -855,18 +855,18 @@ export const pickupPackage = async (req: Request, res: Response, next: NextFunct
       userId: carrierId!
     });
     
-    // Create notification for the sender using new Firestore service
-    await sendNotification(
-      packageItem.senderId,
-      NotificationType.PACKAGE_PICKED_UP,
-      {
-        title: 'Package Picked Up',
-        message: `Your package ${packageItem.title} has been picked up by the carrier`,
-        data: { packageId: packageItem.id },
-        packageId: packageItem.id,
-        priority: NotificationPriority.LOW
-      }
-    );
+    // // Create notification for the sender using new Firestore service
+    // await sendNotification(
+    //   packageItem.senderId,
+    //   NotificationType.PACKAGE_PICKED_UP,
+    //   {
+    //     title: 'Package Picked Up',
+    //     message: `Your package ${packageItem.title} has been picked up by the carrier`,
+    //     data: { packageId: packageItem.id },
+    //     packageId: packageItem.id,
+    //     priority: NotificationPriority.LOW
+    //   }
+    // );
     
     // Send email notification to sender
     const sender = await User.findById(packageItem.senderId);
@@ -925,43 +925,43 @@ export const reportIssue = async (req: Request, res: Response, next: NextFunctio
     // Notify the other party using new Firestore service
     const recipientId = packageItem.senderId === userId ? packageItem.carrierId : packageItem.senderId;
     
-    if (recipientId) {
-      await sendNotification(
-        recipientId,
-        NotificationType.ISSUE_REPORTED,
-        {
-          title: 'Package Issue Reported',
-          message: `An issue has been reported for package ${packageItem.title}`,
-          data: { packageId: packageItem.id, issueType, description },
-          packageId: packageItem.id,
-          priority: NotificationPriority.HIGH
-        }
-      );
-    }
+    // if (recipientId) {
+    //   await sendNotification(
+    //     recipientId,
+    //     NotificationType.ISSUE_REPORTED,
+    //     {
+    //       title: 'Package Issue Reported',
+    //       message: `An issue has been reported for package ${packageItem.title}`,
+    //       data: { packageId: packageItem.id, issueType, description },
+    //       packageId: packageItem.id,
+    //       priority: NotificationPriority.HIGH
+    //     }
+    //   );
+    // }
     
     // Notify admins using new Firestore service
     const adminUsersSnapshot = await db.collection('users')
       .where('role', '==', 'admin')
       .get();
     
-    const adminNotifications = [];
-    for (const doc of adminUsersSnapshot.docs) {
-      adminNotifications.push(
-        sendNotification(
-          doc.id,
-          NotificationType.ISSUE_REPORTED,
-          {
-            title: 'Package Issue Reported',
-            message: `An issue has been reported for package ${packageItem.title}`,
-            data: { packageId: packageItem.id, issueType, description },
-            packageId: packageItem.id,
-            priority: NotificationPriority.HIGH
-          }
-        )
-      );
-    }
+    // const adminNotifications = [];
+    // // for (const doc of adminUsersSnapshot.docs) {
+    // //   adminNotifications.push(
+    // //     sendNotification(
+    // //       doc.id,
+    // //       NotificationType.ISSUE_REPORTED,
+    // //       {
+    // //         title: 'Package Issue Reported',
+    // //         message: `An issue has been reported for package ${packageItem.title}`,
+    // //         data: { packageId: packageItem.id, issueType, description },
+    // //         packageId: packageItem.id,
+    // //         priority: NotificationPriority.HIGH
+    // //       }
+    // //     )
+    // //   );
+    // // }
     
-    await Promise.all(adminNotifications);
+    // await Promise.all(adminNotifications);
     
     res.status(201).json({
       success: true,
@@ -1133,18 +1133,18 @@ export const deliverPackage = async (req: Request, res: Response, next: NextFunc
       userId: carrierId!
     });
     
-    // Create notification for the sender using new Firestore service
-    await sendNotification(
-      packageItem.senderId,
-      NotificationType.PACKAGE_DELIVERED,
-      {
-        title: 'Package Delivered',
-        message: `Your package ${packageItem.title} has been delivered`,
-        data: { packageId: packageItem.id },
-        packageId: packageItem.id,
-        priority: NotificationPriority.HIGH
-      }
-    );
+    // // Create notification for the sender using new Firestore service
+    // await sendNotification(
+    //   packageItem.senderId,
+    //   NotificationType.PACKAGE_DELIVERED,
+    //   {
+    //     title: 'Package Delivered',
+    //     message: `Your package ${packageItem.title} has been delivered`,
+    //     data: { packageId: packageItem.id },
+    //     packageId: packageItem.id,
+    //     priority: NotificationPriority.HIGH
+    //   }
+    // );
     
     // Send email notification to sender
     const sender = await User.findById(packageItem.senderId);
@@ -1208,18 +1208,18 @@ export const confirmDelivery = async (req: Request, res: Response, next: NextFun
       userId: senderId!
     });
     
-    // Create notification for the carrier using new Firestore service
-    await sendNotification(
-      packageItem.carrierId!,
-      NotificationType.PACKAGE_DELIVERED,
-      {
-        title: 'Delivery Confirmed',
-        message: `The delivery of package ${packageItem.title} has been confirmed by the sender`,
-        data: { packageId: packageItem.id },
-        packageId: packageItem.id,
-        priority: NotificationPriority.MEDIUM
-      }
-    );
+    // // Create notification for the carrier using new Firestore service
+    // await sendNotification(
+    //   packageItem.carrierId!,
+    //   NotificationType.PACKAGE_DELIVERED,
+    //   {
+    //     title: 'Delivery Confirmed',
+    //     message: `The delivery of package ${packageItem.title} has been confirmed by the sender`,
+    //     data: { packageId: packageItem.id },
+    //     packageId: packageItem.id,
+    //     priority: NotificationPriority.MEDIUM
+    //   }
+    // );
     
     res.status(200).json({
       success: true,
