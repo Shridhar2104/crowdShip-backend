@@ -16,21 +16,21 @@ router.post('/',authenticate,authorize(['sender', 'admin', 'carrier']), packageC
  * @desc    Get all packages (filtered by query params)
  * @access  Private
  */
-router.get('/', authenticate, packageController.getPackages);
+router.get('/', authenticate,authorize(['sender', 'admin', 'carrier']), packageController.getPackages);
 
 /**
  * @route   GET /api/v1/packages/me
  * @desc    Get current user's packages
  * @access  Private
  */
-router.get('/me', authenticate, packageController.getUserPackages);
+router.get('/me', authenticate,authorize(['sender', 'admin', 'carrier']), packageController.getUserPackages);
 
 /**
  * @route   GET /api/v1/packages/:id
  * @desc    Get package by ID
  * @access  Private
  */
-router.get('/:id', authenticate, packageController.getPackageById);
+router.get('/:id', packageController.getPackageById);
 
 /**
  * @route   PUT /api/v1/packages/:id

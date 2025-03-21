@@ -90,6 +90,7 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
       email: user.email,
       role: user.role,
     });
+    console.log(tokens);
 
     // TODO: Store refresh token in Firestore or Redis for management
 
