@@ -1,8 +1,8 @@
 import { spawn } from 'child_process';
 import { db, Timestamp, FieldValue } from '../config/database';
 import { logger } from './logger';
-import path from 'path';
-import fs from 'fs';
+import * as path from 'path';
+import * as fs from 'fs';
 
 // Remove this import as it's using the client-side modular API
 // import { getFirestore, collection, getDocs } from 'firebase/firestore';
@@ -101,6 +101,25 @@ interface CarrierData {
 }
 
 class AIMatchingService {
+  public static async findOptimalCarriers(packageId: string, radius: number = 10, maxCarriers: number = 5): Promise<MatchScore[]> {
+    const service = new AIMatchingService();
+    return service.findOptimalCarriers(packageId, radius, maxCarriers);
+  }
+  public static async trainModel(): Promise<boolean> {
+    const service = new AIMatchingService();
+    return service.trainModel();
+  }
+
+  // Add these static methods to AIMatchingService class
+public static async updateModelWithFeedback(matchId: string, success: boolean, feedback: string): Promise<boolean> {
+  const service = new AIMatchingService();
+  return service.updateModelWithFeedback(matchId, success, feedback);
+}
+
+public static async autoMatchPackages(limit: number = 10): Promise<any[]> {
+  const service = new AIMatchingService();
+  return service.autoMatchPackages(limit);
+}
   private readonly MODEL_PATH = path.join(__dirname, '../../ml_models/matching_model.pkl');
   private readonly PYTHON_SCRIPT_PATH = path.join(__dirname, '../../scripts/match_predict.py');
   private readonly TRAINING_DATA_PATH = path.join(__dirname, '../../data/matching_history.json');
@@ -919,4 +938,4 @@ if __name__ == "__main__":
   }
 }
 
-export default new AIMatchingService();
+export default AIMatchingService;

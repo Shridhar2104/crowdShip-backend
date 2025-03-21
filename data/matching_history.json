@@ -1,0 +1,5202 @@
+[
+  {
+    "package": {
+      "id": "package-47",
+      "pickupCoordinates": [
+        33.47011645548438,
+        -112.06199493656031
+      ],
+      "deliveryCoordinates": [
+        41.893125249837595,
+        -87.6213963002804
+      ],
+      "pickupWindow": [
+        "00:23",
+        "02:23"
+      ],
+      "deliveryWindow": [
+        "07:23",
+        "10:23"
+      ],
+      "dimensions": {
+        "length": 102,
+        "width": 50,
+        "height": 81,
+        "weight": 32.8
+      },
+      "urgency": "medium"
+    },
+    "carrier": {
+      "id": "carrier-25",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-29",
+      "pickupCoordinates": [
+        41.86939201147027,
+        -87.61154494854402
+      ],
+      "deliveryCoordinates": [
+        37.35925462788186,
+        -121.87179981721387
+      ],
+      "pickupWindow": [
+        "18:11",
+        "21:11"
+      ],
+      "deliveryWindow": [
+        "02:11",
+        "05:11"
+      ],
+      "dimensions": {
+        "length": 25,
+        "width": 17,
+        "height": 8,
+        "weight": 4.5
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-14",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-14",
+      "pickupCoordinates": [
+        32.71079942286892,
+        -117.15469252454187
+      ],
+      "deliveryCoordinates": [
+        41.90098493036877,
+        -87.60700431309834
+      ],
+      "pickupWindow": [
+        "04:45",
+        "07:45"
+      ],
+      "deliveryWindow": [
+        "12:45",
+        "15:45"
+      ],
+      "dimensions": {
+        "length": 151,
+        "width": 51,
+        "height": 82,
+        "weight": 31.1
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-6",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-32",
+      "pickupCoordinates": [
+        37.318546517920836,
+        -121.8775938736831
+      ],
+      "deliveryCoordinates": [
+        34.04632967465446,
+        -118.24449018644549
+      ],
+      "pickupWindow": [
+        "04:02",
+        "07:02"
+      ],
+      "deliveryWindow": [
+        "12:02",
+        "15:02"
+      ],
+      "dimensions": {
+        "length": 12,
+        "width": 12,
+        "height": 7,
+        "weight": 3
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-13",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-15",
+      "pickupCoordinates": [
+        29.403914120664965,
+        -98.48548064696602
+      ],
+      "deliveryCoordinates": [
+        32.75454866540772,
+        -96.81589609265424
+      ],
+      "pickupWindow": [
+        "11:54",
+        "15:54"
+      ],
+      "deliveryWindow": [
+        "20:54",
+        "23:54"
+      ],
+      "dimensions": {
+        "length": 19,
+        "width": 10,
+        "height": 12,
+        "weight": 2.4
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-24",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-45",
+      "pickupCoordinates": [
+        32.70483917810135,
+        -117.17943363827416
+      ],
+      "deliveryCoordinates": [
+        39.932008737943555,
+        -75.16522245727649
+      ],
+      "pickupWindow": [
+        "12:21",
+        "16:21"
+      ],
+      "deliveryWindow": [
+        "21:21",
+        "24:21"
+      ],
+      "dimensions": {
+        "length": 55,
+        "width": 30,
+        "height": 16,
+        "weight": 5.9
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-20",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-18",
+      "pickupCoordinates": [
+        29.76307702360389,
+        -95.37283822673251
+      ],
+      "deliveryCoordinates": [
+        32.780933768033044,
+        -96.79676464275015
+      ],
+      "pickupWindow": [
+        "02:43",
+        "06:43"
+      ],
+      "deliveryWindow": [
+        "10:43",
+        "13:43"
+      ],
+      "dimensions": {
+        "length": 22,
+        "width": 17,
+        "height": 9,
+        "weight": 4.1
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-1",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-47",
+      "pickupCoordinates": [
+        33.47011645548438,
+        -112.06199493656031
+      ],
+      "deliveryCoordinates": [
+        41.893125249837595,
+        -87.6213963002804
+      ],
+      "pickupWindow": [
+        "00:23",
+        "02:23"
+      ],
+      "deliveryWindow": [
+        "07:23",
+        "10:23"
+      ],
+      "dimensions": {
+        "length": 102,
+        "width": 50,
+        "height": 81,
+        "weight": 32.8
+      },
+      "urgency": "medium"
+    },
+    "carrier": {
+      "id": "carrier-10",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-40",
+      "pickupCoordinates": [
+        39.93435322262478,
+        -75.18067837793254
+      ],
+      "deliveryCoordinates": [
+        40.69620582385082,
+        -74.01429116519843
+      ],
+      "pickupWindow": [
+        "16:56",
+        "18:56"
+      ],
+      "deliveryWindow": [
+        "20:56",
+        "23:56"
+      ],
+      "dimensions": {
+        "length": 56,
+        "width": 16,
+        "height": 18,
+        "weight": 9.8
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-9",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-30",
+      "pickupCoordinates": [
+        29.424649634317394,
+        -98.48352549600236
+      ],
+      "deliveryCoordinates": [
+        33.47067746702949,
+        -112.05644934323588
+      ],
+      "pickupWindow": [
+        "09:21",
+        "13:21"
+      ],
+      "deliveryWindow": [
+        "18:21",
+        "21:21"
+      ],
+      "dimensions": {
+        "length": 105,
+        "width": 60,
+        "height": 90,
+        "weight": 47.8
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-8",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-42",
+      "pickupCoordinates": [
+        34.05489396307399,
+        -118.25588565480783
+      ],
+      "deliveryCoordinates": [
+        39.93752546078105,
+        -75.16929105959693
+      ],
+      "pickupWindow": [
+        "09:40",
+        "12:40"
+      ],
+      "deliveryWindow": [
+        "17:40",
+        "20:40"
+      ],
+      "dimensions": {
+        "length": 28,
+        "width": 30,
+        "height": 19,
+        "weight": 12
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-10",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-3",
+      "pickupCoordinates": [
+        29.435714005337825,
+        -98.51604969416285
+      ],
+      "deliveryCoordinates": [
+        37.357840948319975,
+        -121.87528106026647
+      ],
+      "pickupWindow": [
+        "10:00",
+        "14:00"
+      ],
+      "deliveryWindow": [
+        "19:00",
+        "22:00"
+      ],
+      "dimensions": {
+        "length": 65,
+        "width": 67,
+        "height": 81,
+        "weight": 27.6
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-14",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-22",
+      "pickupCoordinates": [
+        32.7857196437747,
+        -96.77241953178299
+      ],
+      "deliveryCoordinates": [
+        33.46586614898086,
+        -112.06325465001493
+      ],
+      "pickupWindow": [
+        "03:43",
+        "05:43"
+      ],
+      "deliveryWindow": [
+        "10:43",
+        "13:43"
+      ],
+      "dimensions": {
+        "length": 55,
+        "width": 36,
+        "height": 25,
+        "weight": 8.9
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-21",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-19",
+      "pickupCoordinates": [
+        33.45104641637261,
+        -112.06966652731116
+      ],
+      "deliveryCoordinates": [
+        40.69229910789415,
+        -73.9991127003767
+      ],
+      "pickupWindow": [
+        "16:42",
+        "19:42"
+      ],
+      "deliveryWindow": [
+        "00:42",
+        "03:42"
+      ],
+      "dimensions": {
+        "length": 123,
+        "width": 42,
+        "height": 77,
+        "weight": 32.5
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-4",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-40",
+      "pickupCoordinates": [
+        39.93435322262478,
+        -75.18067837793254
+      ],
+      "deliveryCoordinates": [
+        40.69620582385082,
+        -74.01429116519843
+      ],
+      "pickupWindow": [
+        "16:56",
+        "18:56"
+      ],
+      "deliveryWindow": [
+        "20:56",
+        "23:56"
+      ],
+      "dimensions": {
+        "length": 56,
+        "width": 16,
+        "height": 18,
+        "weight": 9.8
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-26",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-38",
+      "pickupCoordinates": [
+        41.87117358329982,
+        -87.61401996504063
+      ],
+      "deliveryCoordinates": [
+        40.6988299986841,
+        -74.00160318295403
+      ],
+      "pickupWindow": [
+        "08:22",
+        "10:22"
+      ],
+      "deliveryWindow": [
+        "15:22",
+        "18:22"
+      ],
+      "dimensions": {
+        "length": 195,
+        "width": 64,
+        "height": 88,
+        "weight": 29.6
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-1",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-10",
+      "pickupCoordinates": [
+        40.70542978538614,
+        -73.98808665873966
+      ],
+      "deliveryCoordinates": [
+        29.77019023095403,
+        -95.3475000808219
+      ],
+      "pickupWindow": [
+        "11:12",
+        "15:12"
+      ],
+      "deliveryWindow": [
+        "20:12",
+        "23:12"
+      ],
+      "dimensions": {
+        "length": 24,
+        "width": 16,
+        "height": 13,
+        "weight": 3.3
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-7",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-33",
+      "pickupCoordinates": [
+        40.72752050292174,
+        -74.02211496995434
+      ],
+      "deliveryCoordinates": [
+        41.902868502101086,
+        -87.6438695399521
+      ],
+      "pickupWindow": [
+        "01:56",
+        "04:56"
+      ],
+      "deliveryWindow": [
+        "09:56",
+        "12:56"
+      ],
+      "dimensions": {
+        "length": 168,
+        "width": 88,
+        "height": 99,
+        "weight": 22.3
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-14",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-48",
+      "pickupCoordinates": [
+        37.32315766927007,
+        -121.8630548701338
+      ],
+      "deliveryCoordinates": [
+        29.77902797799041,
+        -95.37367319763462
+      ],
+      "pickupWindow": [
+        "11:35",
+        "14:35"
+      ],
+      "deliveryWindow": [
+        "19:35",
+        "22:35"
+      ],
+      "dimensions": {
+        "length": 175,
+        "width": 77,
+        "height": 47,
+        "weight": 17.1
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-23",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-2",
+      "pickupCoordinates": [
+        32.73159765670898,
+        -117.14307637719564
+      ],
+      "deliveryCoordinates": [
+        34.03733353613095,
+        -118.22028650879295
+      ],
+      "pickupWindow": [
+        "02:55",
+        "06:55"
+      ],
+      "deliveryWindow": [
+        "08:55",
+        "11:55"
+      ],
+      "dimensions": {
+        "length": 55,
+        "width": 16,
+        "height": 21,
+        "weight": 2.5
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-26",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-19",
+      "pickupCoordinates": [
+        33.45104641637261,
+        -112.06966652731116
+      ],
+      "deliveryCoordinates": [
+        40.69229910789415,
+        -73.9991127003767
+      ],
+      "pickupWindow": [
+        "16:42",
+        "19:42"
+      ],
+      "deliveryWindow": [
+        "00:42",
+        "03:42"
+      ],
+      "dimensions": {
+        "length": 123,
+        "width": 42,
+        "height": 77,
+        "weight": 32.5
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-21",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-10",
+      "pickupCoordinates": [
+        40.70542978538614,
+        -73.98808665873966
+      ],
+      "deliveryCoordinates": [
+        29.77019023095403,
+        -95.3475000808219
+      ],
+      "pickupWindow": [
+        "11:12",
+        "15:12"
+      ],
+      "deliveryWindow": [
+        "20:12",
+        "23:12"
+      ],
+      "dimensions": {
+        "length": 24,
+        "width": 16,
+        "height": 13,
+        "weight": 3.3
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-10",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-23",
+      "pickupCoordinates": [
+        40.72917095252814,
+        -74.02632402706372
+      ],
+      "deliveryCoordinates": [
+        32.78700119919713,
+        -96.80128072937426
+      ],
+      "pickupWindow": [
+        "10:31",
+        "13:31"
+      ],
+      "deliveryWindow": [
+        "18:31",
+        "21:31"
+      ],
+      "dimensions": {
+        "length": 168,
+        "width": 95,
+        "height": 68,
+        "weight": 15.6
+      },
+      "urgency": "medium"
+    },
+    "carrier": {
+      "id": "carrier-17",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-25",
+      "pickupCoordinates": [
+        41.888584424790125,
+        -87.63256356930897
+      ],
+      "deliveryCoordinates": [
+        33.43935754920059,
+        -112.05917124700537
+      ],
+      "pickupWindow": [
+        "02:00",
+        "06:00"
+      ],
+      "deliveryWindow": [
+        "11:00",
+        "14:00"
+      ],
+      "dimensions": {
+        "length": 37,
+        "width": 28,
+        "height": 15,
+        "weight": 2.5
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-27",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-40",
+      "pickupCoordinates": [
+        39.93435322262478,
+        -75.18067837793254
+      ],
+      "deliveryCoordinates": [
+        40.69620582385082,
+        -74.01429116519843
+      ],
+      "pickupWindow": [
+        "16:56",
+        "18:56"
+      ],
+      "deliveryWindow": [
+        "20:56",
+        "23:56"
+      ],
+      "dimensions": {
+        "length": 56,
+        "width": 16,
+        "height": 18,
+        "weight": 9.8
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-25",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-5",
+      "pickupCoordinates": [
+        39.97250680455186,
+        -75.18497711304363
+      ],
+      "deliveryCoordinates": [
+        37.33917567727054,
+        -121.90858389038546
+      ],
+      "pickupWindow": [
+        "06:03",
+        "08:03"
+      ],
+      "deliveryWindow": [
+        "13:03",
+        "16:03"
+      ],
+      "dimensions": {
+        "length": 36,
+        "width": 30,
+        "height": 21,
+        "weight": 8.2
+      },
+      "urgency": "medium"
+    },
+    "carrier": {
+      "id": "carrier-17",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-3",
+      "pickupCoordinates": [
+        29.435714005337825,
+        -98.51604969416285
+      ],
+      "deliveryCoordinates": [
+        37.357840948319975,
+        -121.87528106026647
+      ],
+      "pickupWindow": [
+        "10:00",
+        "14:00"
+      ],
+      "deliveryWindow": [
+        "19:00",
+        "22:00"
+      ],
+      "dimensions": {
+        "length": 65,
+        "width": 67,
+        "height": 81,
+        "weight": 27.6
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-5",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-46",
+      "pickupCoordinates": [
+        34.06073952244009,
+        -118.21911874068735
+      ],
+      "deliveryCoordinates": [
+        29.422801281455065,
+        -98.49549411670876
+      ],
+      "pickupWindow": [
+        "10:25",
+        "14:25"
+      ],
+      "deliveryWindow": [
+        "19:25",
+        "22:25"
+      ],
+      "dimensions": {
+        "length": 58,
+        "width": 15,
+        "height": 27,
+        "weight": 7.6
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-19",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-15",
+      "pickupCoordinates": [
+        29.403914120664965,
+        -98.48548064696602
+      ],
+      "deliveryCoordinates": [
+        32.75454866540772,
+        -96.81589609265424
+      ],
+      "pickupWindow": [
+        "11:54",
+        "15:54"
+      ],
+      "deliveryWindow": [
+        "20:54",
+        "23:54"
+      ],
+      "dimensions": {
+        "length": 19,
+        "width": 10,
+        "height": 12,
+        "weight": 2.4
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-17",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-45",
+      "pickupCoordinates": [
+        32.70483917810135,
+        -117.17943363827416
+      ],
+      "deliveryCoordinates": [
+        39.932008737943555,
+        -75.16522245727649
+      ],
+      "pickupWindow": [
+        "12:21",
+        "16:21"
+      ],
+      "deliveryWindow": [
+        "21:21",
+        "24:21"
+      ],
+      "dimensions": {
+        "length": 55,
+        "width": 30,
+        "height": 16,
+        "weight": 5.9
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-25",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-34",
+      "pickupCoordinates": [
+        29.77343806535204,
+        -95.36457247196647
+      ],
+      "deliveryCoordinates": [
+        37.32519738619467,
+        -121.8969363479481
+      ],
+      "pickupWindow": [
+        "19:56",
+        "22:56"
+      ],
+      "deliveryWindow": [
+        "03:56",
+        "06:56"
+      ],
+      "dimensions": {
+        "length": 191,
+        "width": 58,
+        "height": 48,
+        "weight": 24.3
+      },
+      "urgency": "medium"
+    },
+    "carrier": {
+      "id": "carrier-12",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-38",
+      "pickupCoordinates": [
+        41.87117358329982,
+        -87.61401996504063
+      ],
+      "deliveryCoordinates": [
+        40.6988299986841,
+        -74.00160318295403
+      ],
+      "pickupWindow": [
+        "08:22",
+        "10:22"
+      ],
+      "deliveryWindow": [
+        "15:22",
+        "18:22"
+      ],
+      "dimensions": {
+        "length": 195,
+        "width": 64,
+        "height": 88,
+        "weight": 29.6
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-11",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-11",
+      "pickupCoordinates": [
+        39.9746166655852,
+        -75.14130782400808
+      ],
+      "deliveryCoordinates": [
+        37.35648492785464,
+        -121.8939491743534
+      ],
+      "pickupWindow": [
+        "12:01",
+        "14:01"
+      ],
+      "deliveryWindow": [
+        "19:01",
+        "22:01"
+      ],
+      "dimensions": {
+        "length": 157,
+        "width": 59,
+        "height": 41,
+        "weight": 36.1
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-5",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-33",
+      "pickupCoordinates": [
+        40.72752050292174,
+        -74.02211496995434
+      ],
+      "deliveryCoordinates": [
+        41.902868502101086,
+        -87.6438695399521
+      ],
+      "pickupWindow": [
+        "01:56",
+        "04:56"
+      ],
+      "deliveryWindow": [
+        "09:56",
+        "12:56"
+      ],
+      "dimensions": {
+        "length": 168,
+        "width": 88,
+        "height": 99,
+        "weight": 22.3
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-8",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-2",
+      "pickupCoordinates": [
+        32.73159765670898,
+        -117.14307637719564
+      ],
+      "deliveryCoordinates": [
+        34.03733353613095,
+        -118.22028650879295
+      ],
+      "pickupWindow": [
+        "02:55",
+        "06:55"
+      ],
+      "deliveryWindow": [
+        "08:55",
+        "11:55"
+      ],
+      "dimensions": {
+        "length": 55,
+        "width": 16,
+        "height": 21,
+        "weight": 2.5
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-4",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-14",
+      "pickupCoordinates": [
+        32.71079942286892,
+        -117.15469252454187
+      ],
+      "deliveryCoordinates": [
+        41.90098493036877,
+        -87.60700431309834
+      ],
+      "pickupWindow": [
+        "04:45",
+        "07:45"
+      ],
+      "deliveryWindow": [
+        "12:45",
+        "15:45"
+      ],
+      "dimensions": {
+        "length": 151,
+        "width": 51,
+        "height": 82,
+        "weight": 31.1
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-28",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-4",
+      "pickupCoordinates": [
+        33.438194903409546,
+        -112.09417384429214
+      ],
+      "deliveryCoordinates": [
+        32.705136972767065,
+        -117.1474621438726
+      ],
+      "pickupWindow": [
+        "02:16",
+        "04:16"
+      ],
+      "deliveryWindow": [
+        "09:16",
+        "12:16"
+      ],
+      "dimensions": {
+        "length": 24,
+        "width": 16,
+        "height": 14,
+        "weight": 1.3
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-25",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-43",
+      "pickupCoordinates": [
+        33.442471025335074,
+        -112.06960974246283
+      ],
+      "deliveryCoordinates": [
+        40.69597617098823,
+        -73.99352874730883
+      ],
+      "pickupWindow": [
+        "09:27",
+        "11:27"
+      ],
+      "deliveryWindow": [
+        "16:27",
+        "19:27"
+      ],
+      "dimensions": {
+        "length": 112,
+        "width": 84,
+        "height": 58,
+        "weight": 23.1
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-9",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-15",
+      "pickupCoordinates": [
+        29.403914120664965,
+        -98.48548064696602
+      ],
+      "deliveryCoordinates": [
+        32.75454866540772,
+        -96.81589609265424
+      ],
+      "pickupWindow": [
+        "11:54",
+        "15:54"
+      ],
+      "deliveryWindow": [
+        "20:54",
+        "23:54"
+      ],
+      "dimensions": {
+        "length": 19,
+        "width": 10,
+        "height": 12,
+        "weight": 2.4
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-3",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-11",
+      "pickupCoordinates": [
+        39.9746166655852,
+        -75.14130782400808
+      ],
+      "deliveryCoordinates": [
+        37.35648492785464,
+        -121.8939491743534
+      ],
+      "pickupWindow": [
+        "12:01",
+        "14:01"
+      ],
+      "deliveryWindow": [
+        "19:01",
+        "22:01"
+      ],
+      "dimensions": {
+        "length": 157,
+        "width": 59,
+        "height": 41,
+        "weight": 36.1
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-23",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-8",
+      "pickupCoordinates": [
+        37.329732873814194,
+        -121.89330787692454
+      ],
+      "deliveryCoordinates": [
+        29.74054835163261,
+        -95.34862347902788
+      ],
+      "pickupWindow": [
+        "18:37",
+        "20:37"
+      ],
+      "deliveryWindow": [
+        "01:37",
+        "04:37"
+      ],
+      "dimensions": {
+        "length": 117,
+        "width": 44,
+        "height": 74,
+        "weight": 48.4
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-22",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-22",
+      "pickupCoordinates": [
+        32.7857196437747,
+        -96.77241953178299
+      ],
+      "deliveryCoordinates": [
+        33.46586614898086,
+        -112.06325465001493
+      ],
+      "pickupWindow": [
+        "03:43",
+        "05:43"
+      ],
+      "deliveryWindow": [
+        "10:43",
+        "13:43"
+      ],
+      "dimensions": {
+        "length": 55,
+        "width": 36,
+        "height": 25,
+        "weight": 8.9
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-22",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-28",
+      "pickupCoordinates": [
+        41.89173648432863,
+        -87.63012017138884
+      ],
+      "deliveryCoordinates": [
+        29.405391679193528,
+        -98.48727704991698
+      ],
+      "pickupWindow": [
+        "16:09",
+        "20:09"
+      ],
+      "deliveryWindow": [
+        "01:09",
+        "04:09"
+      ],
+      "dimensions": {
+        "length": 26,
+        "width": 18,
+        "height": 5,
+        "weight": 3.9
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-17",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-24",
+      "pickupCoordinates": [
+        39.97074775724691,
+        -75.17810663588071
+      ],
+      "deliveryCoordinates": [
+        34.05453991395172,
+        -118.26217064142352
+      ],
+      "pickupWindow": [
+        "01:05",
+        "05:05"
+      ],
+      "deliveryWindow": [
+        "10:05",
+        "13:05"
+      ],
+      "dimensions": {
+        "length": 25,
+        "width": 23,
+        "height": 16,
+        "weight": 9
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-22",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-32",
+      "pickupCoordinates": [
+        37.318546517920836,
+        -121.8775938736831
+      ],
+      "deliveryCoordinates": [
+        34.04632967465446,
+        -118.24449018644549
+      ],
+      "pickupWindow": [
+        "04:02",
+        "07:02"
+      ],
+      "deliveryWindow": [
+        "12:02",
+        "15:02"
+      ],
+      "dimensions": {
+        "length": 12,
+        "width": 12,
+        "height": 7,
+        "weight": 3
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-11",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-46",
+      "pickupCoordinates": [
+        34.06073952244009,
+        -118.21911874068735
+      ],
+      "deliveryCoordinates": [
+        29.422801281455065,
+        -98.49549411670876
+      ],
+      "pickupWindow": [
+        "10:25",
+        "14:25"
+      ],
+      "deliveryWindow": [
+        "19:25",
+        "22:25"
+      ],
+      "dimensions": {
+        "length": 58,
+        "width": 15,
+        "height": 27,
+        "weight": 7.6
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-24",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-17",
+      "pickupCoordinates": [
+        34.07058898677162,
+        -118.233783071016
+      ],
+      "deliveryCoordinates": [
+        37.334121570248804,
+        -121.8771148380259
+      ],
+      "pickupWindow": [
+        "00:26",
+        "02:26"
+      ],
+      "deliveryWindow": [
+        "07:26",
+        "10:26"
+      ],
+      "dimensions": {
+        "length": 119,
+        "width": 96,
+        "height": 44,
+        "weight": 32.2
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-8",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-41",
+      "pickupCoordinates": [
+        39.96743217280151,
+        -75.17610711078308
+      ],
+      "deliveryCoordinates": [
+        37.31469632404773,
+        -121.9004378076729
+      ],
+      "pickupWindow": [
+        "15:00",
+        "17:00"
+      ],
+      "deliveryWindow": [
+        "22:00",
+        "25:00"
+      ],
+      "dimensions": {
+        "length": 24,
+        "width": 31,
+        "height": 24,
+        "weight": 8.5
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-9",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-30",
+      "pickupCoordinates": [
+        29.424649634317394,
+        -98.48352549600236
+      ],
+      "deliveryCoordinates": [
+        33.47067746702949,
+        -112.05644934323588
+      ],
+      "pickupWindow": [
+        "09:21",
+        "13:21"
+      ],
+      "deliveryWindow": [
+        "18:21",
+        "21:21"
+      ],
+      "dimensions": {
+        "length": 105,
+        "width": 60,
+        "height": 90,
+        "weight": 47.8
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-13",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-1",
+      "pickupCoordinates": [
+        41.88049398384061,
+        -87.63618078629453
+      ],
+      "deliveryCoordinates": [
+        29.773722341980616,
+        -95.35737111940615
+      ],
+      "pickupWindow": [
+        "05:39",
+        "08:39"
+      ],
+      "deliveryWindow": [
+        "13:39",
+        "16:39"
+      ],
+      "dimensions": {
+        "length": 158,
+        "width": 56,
+        "height": 97,
+        "weight": 35.5
+      },
+      "urgency": "medium"
+    },
+    "carrier": {
+      "id": "carrier-18",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-15",
+      "pickupCoordinates": [
+        29.403914120664965,
+        -98.48548064696602
+      ],
+      "deliveryCoordinates": [
+        32.75454866540772,
+        -96.81589609265424
+      ],
+      "pickupWindow": [
+        "11:54",
+        "15:54"
+      ],
+      "deliveryWindow": [
+        "20:54",
+        "23:54"
+      ],
+      "dimensions": {
+        "length": 19,
+        "width": 10,
+        "height": 12,
+        "weight": 2.4
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-2",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-14",
+      "pickupCoordinates": [
+        32.71079942286892,
+        -117.15469252454187
+      ],
+      "deliveryCoordinates": [
+        41.90098493036877,
+        -87.60700431309834
+      ],
+      "pickupWindow": [
+        "04:45",
+        "07:45"
+      ],
+      "deliveryWindow": [
+        "12:45",
+        "15:45"
+      ],
+      "dimensions": {
+        "length": 151,
+        "width": 51,
+        "height": 82,
+        "weight": 31.1
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-25",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-15",
+      "pickupCoordinates": [
+        29.403914120664965,
+        -98.48548064696602
+      ],
+      "deliveryCoordinates": [
+        32.75454866540772,
+        -96.81589609265424
+      ],
+      "pickupWindow": [
+        "11:54",
+        "15:54"
+      ],
+      "deliveryWindow": [
+        "20:54",
+        "23:54"
+      ],
+      "dimensions": {
+        "length": 19,
+        "width": 10,
+        "height": 12,
+        "weight": 2.4
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-6",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-36",
+      "pickupCoordinates": [
+        32.72305035742211,
+        -117.17263854340045
+      ],
+      "deliveryCoordinates": [
+        41.896162634701085,
+        -87.60527156575579
+      ],
+      "pickupWindow": [
+        "04:27",
+        "06:27"
+      ],
+      "deliveryWindow": [
+        "11:27",
+        "14:27"
+      ],
+      "dimensions": {
+        "length": 56,
+        "width": 64,
+        "height": 83,
+        "weight": 16.2
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-26",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-43",
+      "pickupCoordinates": [
+        33.442471025335074,
+        -112.06960974246283
+      ],
+      "deliveryCoordinates": [
+        40.69597617098823,
+        -73.99352874730883
+      ],
+      "pickupWindow": [
+        "09:27",
+        "11:27"
+      ],
+      "deliveryWindow": [
+        "16:27",
+        "19:27"
+      ],
+      "dimensions": {
+        "length": 112,
+        "width": 84,
+        "height": 58,
+        "weight": 23.1
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-23",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-44",
+      "pickupCoordinates": [
+        32.72175994585369,
+        -117.17648195177429
+      ],
+      "deliveryCoordinates": [
+        40.70680671607367,
+        -74.01038331956892
+      ],
+      "pickupWindow": [
+        "11:29",
+        "13:29"
+      ],
+      "deliveryWindow": [
+        "18:29",
+        "21:29"
+      ],
+      "dimensions": {
+        "length": 77,
+        "width": 98,
+        "height": 79,
+        "weight": 25.9
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-21",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-23",
+      "pickupCoordinates": [
+        40.72917095252814,
+        -74.02632402706372
+      ],
+      "deliveryCoordinates": [
+        32.78700119919713,
+        -96.80128072937426
+      ],
+      "pickupWindow": [
+        "10:31",
+        "13:31"
+      ],
+      "deliveryWindow": [
+        "18:31",
+        "21:31"
+      ],
+      "dimensions": {
+        "length": 168,
+        "width": 95,
+        "height": 68,
+        "weight": 15.6
+      },
+      "urgency": "medium"
+    },
+    "carrier": {
+      "id": "carrier-1",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-10",
+      "pickupCoordinates": [
+        40.70542978538614,
+        -73.98808665873966
+      ],
+      "deliveryCoordinates": [
+        29.77019023095403,
+        -95.3475000808219
+      ],
+      "pickupWindow": [
+        "11:12",
+        "15:12"
+      ],
+      "deliveryWindow": [
+        "20:12",
+        "23:12"
+      ],
+      "dimensions": {
+        "length": 24,
+        "width": 16,
+        "height": 13,
+        "weight": 3.3
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-3",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-42",
+      "pickupCoordinates": [
+        34.05489396307399,
+        -118.25588565480783
+      ],
+      "deliveryCoordinates": [
+        39.93752546078105,
+        -75.16929105959693
+      ],
+      "pickupWindow": [
+        "09:40",
+        "12:40"
+      ],
+      "deliveryWindow": [
+        "17:40",
+        "20:40"
+      ],
+      "dimensions": {
+        "length": 28,
+        "width": 30,
+        "height": 19,
+        "weight": 12
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-24",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-50",
+      "pickupCoordinates": [
+        40.72641595741244,
+        -74.02343700677368
+      ],
+      "deliveryCoordinates": [
+        29.745121838375177,
+        -95.38473773970335
+      ],
+      "pickupWindow": [
+        "19:24",
+        "21:24"
+      ],
+      "deliveryWindow": [
+        "02:24",
+        "05:24"
+      ],
+      "dimensions": {
+        "length": 24,
+        "width": 17,
+        "height": 11,
+        "weight": 3.8
+      },
+      "urgency": "medium"
+    },
+    "carrier": {
+      "id": "carrier-5",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-44",
+      "pickupCoordinates": [
+        32.72175994585369,
+        -117.17648195177429
+      ],
+      "deliveryCoordinates": [
+        40.70680671607367,
+        -74.01038331956892
+      ],
+      "pickupWindow": [
+        "11:29",
+        "13:29"
+      ],
+      "deliveryWindow": [
+        "18:29",
+        "21:29"
+      ],
+      "dimensions": {
+        "length": 77,
+        "width": 98,
+        "height": 79,
+        "weight": 25.9
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-30",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-19",
+      "pickupCoordinates": [
+        33.45104641637261,
+        -112.06966652731116
+      ],
+      "deliveryCoordinates": [
+        40.69229910789415,
+        -73.9991127003767
+      ],
+      "pickupWindow": [
+        "16:42",
+        "19:42"
+      ],
+      "deliveryWindow": [
+        "00:42",
+        "03:42"
+      ],
+      "dimensions": {
+        "length": 123,
+        "width": 42,
+        "height": 77,
+        "weight": 32.5
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-28",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-42",
+      "pickupCoordinates": [
+        34.05489396307399,
+        -118.25588565480783
+      ],
+      "deliveryCoordinates": [
+        39.93752546078105,
+        -75.16929105959693
+      ],
+      "pickupWindow": [
+        "09:40",
+        "12:40"
+      ],
+      "deliveryWindow": [
+        "17:40",
+        "20:40"
+      ],
+      "dimensions": {
+        "length": 28,
+        "width": 30,
+        "height": 19,
+        "weight": 12
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-11",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-49",
+      "pickupCoordinates": [
+        29.768642120982356,
+        -95.36891330537624
+      ],
+      "deliveryCoordinates": [
+        39.97015084971419,
+        -75.17567248786276
+      ],
+      "pickupWindow": [
+        "15:44",
+        "19:44"
+      ],
+      "deliveryWindow": [
+        "00:44",
+        "03:44"
+      ],
+      "dimensions": {
+        "length": 54,
+        "width": 21,
+        "height": 23,
+        "weight": 2.9
+      },
+      "urgency": "medium"
+    },
+    "carrier": {
+      "id": "carrier-18",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-23",
+      "pickupCoordinates": [
+        40.72917095252814,
+        -74.02632402706372
+      ],
+      "deliveryCoordinates": [
+        32.78700119919713,
+        -96.80128072937426
+      ],
+      "pickupWindow": [
+        "10:31",
+        "13:31"
+      ],
+      "deliveryWindow": [
+        "18:31",
+        "21:31"
+      ],
+      "dimensions": {
+        "length": 168,
+        "width": 95,
+        "height": 68,
+        "weight": 15.6
+      },
+      "urgency": "medium"
+    },
+    "carrier": {
+      "id": "carrier-27",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-19",
+      "pickupCoordinates": [
+        33.45104641637261,
+        -112.06966652731116
+      ],
+      "deliveryCoordinates": [
+        40.69229910789415,
+        -73.9991127003767
+      ],
+      "pickupWindow": [
+        "16:42",
+        "19:42"
+      ],
+      "deliveryWindow": [
+        "00:42",
+        "03:42"
+      ],
+      "dimensions": {
+        "length": 123,
+        "width": 42,
+        "height": 77,
+        "weight": 32.5
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-26",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-9",
+      "pickupCoordinates": [
+        34.04833671242673,
+        -118.2510683165518
+      ],
+      "deliveryCoordinates": [
+        29.40350982656823,
+        -98.50434137078076
+      ],
+      "pickupWindow": [
+        "12:58",
+        "14:58"
+      ],
+      "deliveryWindow": [
+        "19:58",
+        "22:58"
+      ],
+      "dimensions": {
+        "length": 43,
+        "width": 15,
+        "height": 18,
+        "weight": 5.2
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-30",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-3",
+      "pickupCoordinates": [
+        29.435714005337825,
+        -98.51604969416285
+      ],
+      "deliveryCoordinates": [
+        37.357840948319975,
+        -121.87528106026647
+      ],
+      "pickupWindow": [
+        "10:00",
+        "14:00"
+      ],
+      "deliveryWindow": [
+        "19:00",
+        "22:00"
+      ],
+      "dimensions": {
+        "length": 65,
+        "width": 67,
+        "height": 81,
+        "weight": 27.6
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-10",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-15",
+      "pickupCoordinates": [
+        29.403914120664965,
+        -98.48548064696602
+      ],
+      "deliveryCoordinates": [
+        32.75454866540772,
+        -96.81589609265424
+      ],
+      "pickupWindow": [
+        "11:54",
+        "15:54"
+      ],
+      "deliveryWindow": [
+        "20:54",
+        "23:54"
+      ],
+      "dimensions": {
+        "length": 19,
+        "width": 10,
+        "height": 12,
+        "weight": 2.4
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-23",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-27",
+      "pickupCoordinates": [
+        37.320652326379566,
+        -121.89078268356768
+      ],
+      "deliveryCoordinates": [
+        34.05447505426285,
+        -118.23589872790048
+      ],
+      "pickupWindow": [
+        "01:18",
+        "05:18"
+      ],
+      "deliveryWindow": [
+        "10:18",
+        "13:18"
+      ],
+      "dimensions": {
+        "length": 64,
+        "width": 41,
+        "height": 71,
+        "weight": 45.5
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-9",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-5",
+      "pickupCoordinates": [
+        39.97250680455186,
+        -75.18497711304363
+      ],
+      "deliveryCoordinates": [
+        37.33917567727054,
+        -121.90858389038546
+      ],
+      "pickupWindow": [
+        "06:03",
+        "08:03"
+      ],
+      "deliveryWindow": [
+        "13:03",
+        "16:03"
+      ],
+      "dimensions": {
+        "length": 36,
+        "width": 30,
+        "height": 21,
+        "weight": 8.2
+      },
+      "urgency": "medium"
+    },
+    "carrier": {
+      "id": "carrier-10",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-46",
+      "pickupCoordinates": [
+        34.06073952244009,
+        -118.21911874068735
+      ],
+      "deliveryCoordinates": [
+        29.422801281455065,
+        -98.49549411670876
+      ],
+      "pickupWindow": [
+        "10:25",
+        "14:25"
+      ],
+      "deliveryWindow": [
+        "19:25",
+        "22:25"
+      ],
+      "dimensions": {
+        "length": 58,
+        "width": 15,
+        "height": 27,
+        "weight": 7.6
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-30",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-15",
+      "pickupCoordinates": [
+        29.403914120664965,
+        -98.48548064696602
+      ],
+      "deliveryCoordinates": [
+        32.75454866540772,
+        -96.81589609265424
+      ],
+      "pickupWindow": [
+        "11:54",
+        "15:54"
+      ],
+      "deliveryWindow": [
+        "20:54",
+        "23:54"
+      ],
+      "dimensions": {
+        "length": 19,
+        "width": 10,
+        "height": 12,
+        "weight": 2.4
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-1",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-8",
+      "pickupCoordinates": [
+        37.329732873814194,
+        -121.89330787692454
+      ],
+      "deliveryCoordinates": [
+        29.74054835163261,
+        -95.34862347902788
+      ],
+      "pickupWindow": [
+        "18:37",
+        "20:37"
+      ],
+      "deliveryWindow": [
+        "01:37",
+        "04:37"
+      ],
+      "dimensions": {
+        "length": 117,
+        "width": 44,
+        "height": 74,
+        "weight": 48.4
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-10",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-31",
+      "pickupCoordinates": [
+        32.78563819212993,
+        -96.7762691176441
+      ],
+      "deliveryCoordinates": [
+        29.413338906255927,
+        -98.47191600723379
+      ],
+      "pickupWindow": [
+        "09:38",
+        "13:38"
+      ],
+      "deliveryWindow": [
+        "18:38",
+        "21:38"
+      ],
+      "dimensions": {
+        "length": 51,
+        "width": 24,
+        "height": 27,
+        "weight": 2.8
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-11",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-25",
+      "pickupCoordinates": [
+        41.888584424790125,
+        -87.63256356930897
+      ],
+      "deliveryCoordinates": [
+        33.43935754920059,
+        -112.05917124700537
+      ],
+      "pickupWindow": [
+        "02:00",
+        "06:00"
+      ],
+      "deliveryWindow": [
+        "11:00",
+        "14:00"
+      ],
+      "dimensions": {
+        "length": 37,
+        "width": 28,
+        "height": 15,
+        "weight": 2.5
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-27",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-19",
+      "pickupCoordinates": [
+        33.45104641637261,
+        -112.06966652731116
+      ],
+      "deliveryCoordinates": [
+        40.69229910789415,
+        -73.9991127003767
+      ],
+      "pickupWindow": [
+        "16:42",
+        "19:42"
+      ],
+      "deliveryWindow": [
+        "00:42",
+        "03:42"
+      ],
+      "dimensions": {
+        "length": 123,
+        "width": 42,
+        "height": 77,
+        "weight": 32.5
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-12",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-8",
+      "pickupCoordinates": [
+        37.329732873814194,
+        -121.89330787692454
+      ],
+      "deliveryCoordinates": [
+        29.74054835163261,
+        -95.34862347902788
+      ],
+      "pickupWindow": [
+        "18:37",
+        "20:37"
+      ],
+      "deliveryWindow": [
+        "01:37",
+        "04:37"
+      ],
+      "dimensions": {
+        "length": 117,
+        "width": 44,
+        "height": 74,
+        "weight": 48.4
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-3",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-41",
+      "pickupCoordinates": [
+        39.96743217280151,
+        -75.17610711078308
+      ],
+      "deliveryCoordinates": [
+        37.31469632404773,
+        -121.9004378076729
+      ],
+      "pickupWindow": [
+        "15:00",
+        "17:00"
+      ],
+      "deliveryWindow": [
+        "22:00",
+        "25:00"
+      ],
+      "dimensions": {
+        "length": 24,
+        "width": 31,
+        "height": 24,
+        "weight": 8.5
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-14",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-7",
+      "pickupCoordinates": [
+        39.965791825233794,
+        -75.16095066499842
+      ],
+      "deliveryCoordinates": [
+        41.876323996922345,
+        -87.60950804560929
+      ],
+      "pickupWindow": [
+        "03:47",
+        "05:47"
+      ],
+      "deliveryWindow": [
+        "10:47",
+        "13:47"
+      ],
+      "dimensions": {
+        "length": 52,
+        "width": 29,
+        "height": 24,
+        "weight": 13.1
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-13",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-18",
+      "pickupCoordinates": [
+        29.76307702360389,
+        -95.37283822673251
+      ],
+      "deliveryCoordinates": [
+        32.780933768033044,
+        -96.79676464275015
+      ],
+      "pickupWindow": [
+        "02:43",
+        "06:43"
+      ],
+      "deliveryWindow": [
+        "10:43",
+        "13:43"
+      ],
+      "dimensions": {
+        "length": 22,
+        "width": 17,
+        "height": 9,
+        "weight": 4.1
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-16",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-38",
+      "pickupCoordinates": [
+        41.87117358329982,
+        -87.61401996504063
+      ],
+      "deliveryCoordinates": [
+        40.6988299986841,
+        -74.00160318295403
+      ],
+      "pickupWindow": [
+        "08:22",
+        "10:22"
+      ],
+      "deliveryWindow": [
+        "15:22",
+        "18:22"
+      ],
+      "dimensions": {
+        "length": 195,
+        "width": 64,
+        "height": 88,
+        "weight": 29.6
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-25",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-19",
+      "pickupCoordinates": [
+        33.45104641637261,
+        -112.06966652731116
+      ],
+      "deliveryCoordinates": [
+        40.69229910789415,
+        -73.9991127003767
+      ],
+      "pickupWindow": [
+        "16:42",
+        "19:42"
+      ],
+      "deliveryWindow": [
+        "00:42",
+        "03:42"
+      ],
+      "dimensions": {
+        "length": 123,
+        "width": 42,
+        "height": 77,
+        "weight": 32.5
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-4",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-22",
+      "pickupCoordinates": [
+        32.7857196437747,
+        -96.77241953178299
+      ],
+      "deliveryCoordinates": [
+        33.46586614898086,
+        -112.06325465001493
+      ],
+      "pickupWindow": [
+        "03:43",
+        "05:43"
+      ],
+      "deliveryWindow": [
+        "10:43",
+        "13:43"
+      ],
+      "dimensions": {
+        "length": 55,
+        "width": 36,
+        "height": 25,
+        "weight": 8.9
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-28",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-43",
+      "pickupCoordinates": [
+        33.442471025335074,
+        -112.06960974246283
+      ],
+      "deliveryCoordinates": [
+        40.69597617098823,
+        -73.99352874730883
+      ],
+      "pickupWindow": [
+        "09:27",
+        "11:27"
+      ],
+      "deliveryWindow": [
+        "16:27",
+        "19:27"
+      ],
+      "dimensions": {
+        "length": 112,
+        "width": 84,
+        "height": 58,
+        "weight": 23.1
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-7",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-43",
+      "pickupCoordinates": [
+        33.442471025335074,
+        -112.06960974246283
+      ],
+      "deliveryCoordinates": [
+        40.69597617098823,
+        -73.99352874730883
+      ],
+      "pickupWindow": [
+        "09:27",
+        "11:27"
+      ],
+      "deliveryWindow": [
+        "16:27",
+        "19:27"
+      ],
+      "dimensions": {
+        "length": 112,
+        "width": 84,
+        "height": 58,
+        "weight": 23.1
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-9",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-38",
+      "pickupCoordinates": [
+        41.87117358329982,
+        -87.61401996504063
+      ],
+      "deliveryCoordinates": [
+        40.6988299986841,
+        -74.00160318295403
+      ],
+      "pickupWindow": [
+        "08:22",
+        "10:22"
+      ],
+      "deliveryWindow": [
+        "15:22",
+        "18:22"
+      ],
+      "dimensions": {
+        "length": 195,
+        "width": 64,
+        "height": 88,
+        "weight": 29.6
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-2",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-8",
+      "pickupCoordinates": [
+        37.329732873814194,
+        -121.89330787692454
+      ],
+      "deliveryCoordinates": [
+        29.74054835163261,
+        -95.34862347902788
+      ],
+      "pickupWindow": [
+        "18:37",
+        "20:37"
+      ],
+      "deliveryWindow": [
+        "01:37",
+        "04:37"
+      ],
+      "dimensions": {
+        "length": 117,
+        "width": 44,
+        "height": 74,
+        "weight": 48.4
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-8",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-4",
+      "pickupCoordinates": [
+        33.438194903409546,
+        -112.09417384429214
+      ],
+      "deliveryCoordinates": [
+        32.705136972767065,
+        -117.1474621438726
+      ],
+      "pickupWindow": [
+        "02:16",
+        "04:16"
+      ],
+      "deliveryWindow": [
+        "09:16",
+        "12:16"
+      ],
+      "dimensions": {
+        "length": 24,
+        "width": 16,
+        "height": 14,
+        "weight": 1.3
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-10",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-11",
+      "pickupCoordinates": [
+        39.9746166655852,
+        -75.14130782400808
+      ],
+      "deliveryCoordinates": [
+        37.35648492785464,
+        -121.8939491743534
+      ],
+      "pickupWindow": [
+        "12:01",
+        "14:01"
+      ],
+      "deliveryWindow": [
+        "19:01",
+        "22:01"
+      ],
+      "dimensions": {
+        "length": 157,
+        "width": 59,
+        "height": 41,
+        "weight": 36.1
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-26",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-27",
+      "pickupCoordinates": [
+        37.320652326379566,
+        -121.89078268356768
+      ],
+      "deliveryCoordinates": [
+        34.05447505426285,
+        -118.23589872790048
+      ],
+      "pickupWindow": [
+        "01:18",
+        "05:18"
+      ],
+      "deliveryWindow": [
+        "10:18",
+        "13:18"
+      ],
+      "dimensions": {
+        "length": 64,
+        "width": 41,
+        "height": 71,
+        "weight": 45.5
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-8",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-9",
+      "pickupCoordinates": [
+        34.04833671242673,
+        -118.2510683165518
+      ],
+      "deliveryCoordinates": [
+        29.40350982656823,
+        -98.50434137078076
+      ],
+      "pickupWindow": [
+        "12:58",
+        "14:58"
+      ],
+      "deliveryWindow": [
+        "19:58",
+        "22:58"
+      ],
+      "dimensions": {
+        "length": 43,
+        "width": 15,
+        "height": 18,
+        "weight": 5.2
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-8",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-25",
+      "pickupCoordinates": [
+        41.888584424790125,
+        -87.63256356930897
+      ],
+      "deliveryCoordinates": [
+        33.43935754920059,
+        -112.05917124700537
+      ],
+      "pickupWindow": [
+        "02:00",
+        "06:00"
+      ],
+      "deliveryWindow": [
+        "11:00",
+        "14:00"
+      ],
+      "dimensions": {
+        "length": 37,
+        "width": 28,
+        "height": 15,
+        "weight": 2.5
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-1",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-48",
+      "pickupCoordinates": [
+        37.32315766927007,
+        -121.8630548701338
+      ],
+      "deliveryCoordinates": [
+        29.77902797799041,
+        -95.37367319763462
+      ],
+      "pickupWindow": [
+        "11:35",
+        "14:35"
+      ],
+      "deliveryWindow": [
+        "19:35",
+        "22:35"
+      ],
+      "dimensions": {
+        "length": 175,
+        "width": 77,
+        "height": 47,
+        "weight": 17.1
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-19",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-16",
+      "pickupCoordinates": [
+        33.44573309556306,
+        -112.08488390591064
+      ],
+      "deliveryCoordinates": [
+        29.406960345070456,
+        -98.48431419350915
+      ],
+      "pickupWindow": [
+        "03:12",
+        "07:12"
+      ],
+      "deliveryWindow": [
+        "12:12",
+        "15:12"
+      ],
+      "dimensions": {
+        "length": 56,
+        "width": 36,
+        "height": 16,
+        "weight": 5
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-11",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-40",
+      "pickupCoordinates": [
+        39.93435322262478,
+        -75.18067837793254
+      ],
+      "deliveryCoordinates": [
+        40.69620582385082,
+        -74.01429116519843
+      ],
+      "pickupWindow": [
+        "16:56",
+        "18:56"
+      ],
+      "deliveryWindow": [
+        "20:56",
+        "23:56"
+      ],
+      "dimensions": {
+        "length": 56,
+        "width": 16,
+        "height": 18,
+        "weight": 9.8
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-28",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-19",
+      "pickupCoordinates": [
+        33.45104641637261,
+        -112.06966652731116
+      ],
+      "deliveryCoordinates": [
+        40.69229910789415,
+        -73.9991127003767
+      ],
+      "pickupWindow": [
+        "16:42",
+        "19:42"
+      ],
+      "deliveryWindow": [
+        "00:42",
+        "03:42"
+      ],
+      "dimensions": {
+        "length": 123,
+        "width": 42,
+        "height": 77,
+        "weight": 32.5
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-11",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-44",
+      "pickupCoordinates": [
+        32.72175994585369,
+        -117.17648195177429
+      ],
+      "deliveryCoordinates": [
+        40.70680671607367,
+        -74.01038331956892
+      ],
+      "pickupWindow": [
+        "11:29",
+        "13:29"
+      ],
+      "deliveryWindow": [
+        "18:29",
+        "21:29"
+      ],
+      "dimensions": {
+        "length": 77,
+        "width": 98,
+        "height": 79,
+        "weight": 25.9
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-2",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  },
+  {
+    "package": {
+      "id": "package-24",
+      "pickupCoordinates": [
+        39.97074775724691,
+        -75.17810663588071
+      ],
+      "deliveryCoordinates": [
+        34.05453991395172,
+        -118.26217064142352
+      ],
+      "pickupWindow": [
+        "01:05",
+        "05:05"
+      ],
+      "deliveryWindow": [
+        "10:05",
+        "13:05"
+      ],
+      "dimensions": {
+        "length": 25,
+        "width": 23,
+        "height": 16,
+        "weight": 9
+      },
+      "urgency": "low"
+    },
+    "carrier": {
+      "id": "carrier-19",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 0
+  },
+  {
+    "package": {
+      "id": "package-33",
+      "pickupCoordinates": [
+        40.72752050292174,
+        -74.02211496995434
+      ],
+      "deliveryCoordinates": [
+        41.902868502101086,
+        -87.6438695399521
+      ],
+      "pickupWindow": [
+        "01:56",
+        "04:56"
+      ],
+      "deliveryWindow": [
+        "09:56",
+        "12:56"
+      ],
+      "dimensions": {
+        "length": 168,
+        "width": 88,
+        "height": 99,
+        "weight": 22.3
+      },
+      "urgency": "high"
+    },
+    "carrier": {
+      "id": "carrier-20",
+      "routeCoordinates": [
+        [
+          0,
+          0
+        ]
+      ],
+      "schedule": {
+        "startTime": "08:00",
+        "endTime": "18:00"
+      },
+      "vehicleCapacity": {
+        "length": 100,
+        "width": 100,
+        "height": 100,
+        "weightLimit": 50
+      },
+      "rating": 0,
+      "onTimeRate": 0,
+      "completedDeliveries": [],
+      "vehicleType": "car"
+    },
+    "success": 1
+  }
+]

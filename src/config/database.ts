@@ -5,7 +5,7 @@ import { logger } from '../utils/logger';
 import * as path from 'path';
 import * as fs from 'fs';
 // At the top of your main file (before any other imports)
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 
 dotenv.config({ path: path.resolve(__dirname, '../../.env.local') }); // Adjust path as needed
 const initializeFirebaseAdmin = () => {
