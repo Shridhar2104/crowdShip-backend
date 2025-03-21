@@ -8,6 +8,7 @@ import { logger } from '../utils/logger';
 import { config } from '../config';
 import { db,Timestamp } from '../config/database';
 
+
 /**
  * Register a new user
  * @route POST /api/v1/users/register
@@ -89,6 +90,7 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
       email: user.email,
       role: user.role,
     });
+    console.log(tokens);
 
     // TODO: Store refresh token in Firestore or Redis for management
 
